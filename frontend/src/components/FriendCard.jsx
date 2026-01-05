@@ -4,7 +4,7 @@ import { getLanguageFlag } from "../lib/languageUtils.jsx";
 
 const FriendCard = ({ friend, unreadCount = 0, isOnline = false }) => {
   return (
-    <div className="card hover:shadow-xl transition-all duration-500 hover:scale-[1.03] border group relative bg-[#1E3A8A]/30 backdrop-blur-sm border-[#2563EB]/30 hover:border-[#2563EB]/50">
+    <div className="card hover:shadow-xl transition-all duration-500 hover:scale-[1.03] border group relative bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A] backdrop-blur-sm border-[#2563EB]/30 hover:border-[#2563EB]/50">
       {/* Unread badge */}
       {unreadCount > 0 && (
         <div className="absolute -top-2 -right-2 z-20">

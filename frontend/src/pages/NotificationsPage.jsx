@@ -23,9 +23,9 @@ const NotificationsPage = () => {
   const acceptedRequests = friendRequests?.acceptedReqs || [];
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:p-8 animate-in fade-in duration-500 bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A]">
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 animate-in fade-in duration-500 bg-white">
       <div className="container mx-auto max-w-4xl space-y-8">
-        <div className="p-6 rounded-2xl border border-[#2563EB]/30 backdrop-blur-sm animate-in slide-in-from-top-4 duration-700 bg-[#1E3A8A]/20">
+        <div className="p-6 rounded-2xl border border-[#2563EB]/30 backdrop-blur-sm animate-in slide-in-from-top-4 duration-700 bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A]">
           <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent mb-1">Notifications</h1>
           <p className="text-sm text-blue-200/80">Stay updated with your friend requests and connections</p>
         </div>
@@ -38,13 +38,13 @@ const NotificationsPage = () => {
           <>
             {incomingRequests.length > 0 && (
               <section className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <div className="flex items-center gap-3 bg-[#2563EB]/20 p-4 rounded-xl border border-[#2563EB]/30 backdrop-blur-sm">
+                <div className="flex items-center gap-3 bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A] p-4 rounded-xl border border-[#2563EB]/30 backdrop-blur-sm">
                   <div className="w-10 h-10 rounded-full bg-[#2563EB]/30 flex items-center justify-center">
                     <UserCheckIcon className="h-6 w-6 text-blue-300" />
                   </div>
                   <div className="flex-1">
                     <h2 className="text-xl font-bold text-white">Friend Requests</h2>
-                    <p className="text-sm text-blue-200/80">You have {incomingRequests.length} pending request{incomingRequests.length > 1 ? 's' : ''}</p>
+                    <p className="text-sm text-blue-100">You have {incomingRequests.length} pending request{incomingRequests.length > 1 ? 's' : ''}</p>
                   </div>
                   <span className="badge badge-primary badge-lg h-8 px-4 font-bold">{incomingRequests.length}</span>
                 </div>
@@ -53,7 +53,7 @@ const NotificationsPage = () => {
                   {incomingRequests.map((request, index) => (
                     <div
                       key={request._id}
-                      className="card bg-[#1E3A8A]/30 backdrop-blur-sm hover:shadow-xl transition-all duration-500 hover:scale-[1.01] border border-[#2563EB]/30 hover:border-[#2563EB]/50 group animate-in fade-in slide-in-from-left-4 duration-500"
+                      className="card bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A] backdrop-blur-sm hover:shadow-xl transition-all duration-500 hover:scale-[1.01] border border-[#2563EB]/30 hover:border-[#2563EB]/50 group animate-in fade-in slide-in-from-left-4 duration-500"
                       style={{ animationDelay: `${index * 100}ms` }}
                     >
                       <div className="card-body p-5 relative overflow-hidden">
@@ -99,13 +99,13 @@ const NotificationsPage = () => {
             {/* ACCEPTED REQS NOTIFICATONS */}
             {acceptedRequests.length > 0 && (
               <section className="space-y-4 animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
-                <div className="flex items-center gap-3 bg-[#2563EB]/20 p-4 rounded-xl border border-[#2563EB]/30 backdrop-blur-sm">
+                <div className="flex items-center gap-3 bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A] p-4 rounded-xl border border-[#2563EB]/30 backdrop-blur-sm">
                   <div className="w-10 h-10 rounded-full bg-[#2563EB]/30 flex items-center justify-center">
                     <BellIcon className="h-6 w-6 text-blue-300" />
                   </div>
                   <div>
                     <h2 className="text-xl font-bold text-white">New Connections</h2>
-                    <p className="text-sm text-blue-200/80">Recent accepted friend requests</p>
+                    <p className="text-sm text-blue-100">Recent accepted friend requests</p>
                   </div>
                 </div>
 
@@ -113,7 +113,7 @@ const NotificationsPage = () => {
                   {acceptedRequests.map((notification, index) => (
                     <div 
                       key={notification._id} 
-                      className="card bg-[#1E3A8A]/30 backdrop-blur-sm hover:shadow-xl transition-all duration-500 hover:scale-[1.01] border border-[#2563EB]/30 hover:border-[#2563EB]/50 group animate-in fade-in slide-in-from-right-4 duration-500"
+                      className="card bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A] backdrop-blur-sm hover:shadow-xl transition-all duration-500 hover:scale-[1.01] border border-[#2563EB]/30 hover:border-[#2563EB]/50 group animate-in fade-in slide-in-from-right-4 duration-500"
                       style={{ animationDelay: `${index * 100}ms` }}
                     >
                       <div className="card-body p-5 relative overflow-hidden">

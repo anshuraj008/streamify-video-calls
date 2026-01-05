@@ -167,12 +167,12 @@ const HomePage = () => {
   }, [tokenData, authUser, friends]);
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:p-8 animate-in fade-in duration-500 bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A]">
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 animate-in fade-in duration-500 bg-white">
       <div className="container mx-auto space-y-10">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border border-[#2563EB]/30 backdrop-blur-sm animate-in slide-in-from-top-4 duration-700 p-6 bg-[#1E3A8A]/20">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border border-[#2563EB]/30 backdrop-blur-sm animate-in slide-in-from-top-4 duration-700 p-6 bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A]">
           <div>
-            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent mb-1">Your Friends</h2>
-            <p className="text-sm text-blue-200/80">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-1">Your Friends</h2>
+            <p className="text-sm text-blue-100">
               Connect and practice languages together
             </p>
           </div>

@@ -47,15 +47,15 @@ const OnboardingPage = () => {
 
   return (
     <div 
-      className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A]"
+      className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-white"
       data-theme="forest"
     >
       {/* Animated background elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#2563EB]/10 via-transparent to-[#2563EB]/5"></div>
-      <div className="absolute top-0 left-0 w-96 h-96 bg-[#2563EB]/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#1E3A8A]/30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-transparent to-blue-50/20"></div>
+      <div className="absolute top-0 left-0 w-96 h-96 bg-blue-100/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-100/30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
       
-      <div className="relative border border-[#2563EB]/30 w-full max-w-4xl mx-auto bg-[#1E3A8A]/20 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden">
+      <div className="relative border border-[#2563EB]/30 w-full max-w-4xl mx-auto bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A] backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden">
         {/* Decorative top bar */}
         <div className="h-2 bg-gradient-to-r from-[#2563EB] via-blue-400 to-[#1E3A8A]"></div>
         
@@ -68,10 +68,10 @@ const OnboardingPage = () => {
                 <Sparkles className="w-10 h-10 text-blue-300" />
               </div>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-200 bg-clip-text text-transparent">
+            <h1 className="text-4xl sm:text-5xl font-bold mb-3 text-white">
               Complete Your Profile
             </h1>
-            <p className="text-base sm:text-lg text-blue-200/80 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-blue-100 max-w-2xl mx-auto">
               Let's personalize your experience and connect you with the community
             </p>
           </div>
