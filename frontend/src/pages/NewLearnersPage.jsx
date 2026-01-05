@@ -87,11 +87,19 @@ const NewLearnersPage = () => {
               return (
                 <div
                   key={user._id}
-                  className="card bg-base-200 hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] border border-emerald-100 hover:border-emerald-300 group animate-in fade-in slide-in-from-bottom-8 duration-700"
+                  className={`card hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] border group animate-in fade-in slide-in-from-bottom-8 duration-700 ${
+                    isDarkMode
+                      ? 'bg-base-200 border-emerald-100 hover:border-emerald-300'
+                      : 'bg-gray-800 border-gray-700 hover:border-emerald-700'
+                  }`}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className="card-body p-6 space-y-4 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-emerald-100 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                    <div className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700 ${
+                      isDarkMode
+                        ? 'bg-gradient-to-br from-emerald-100 to-transparent'
+                        : 'bg-gradient-to-br from-emerald-900/30 to-transparent'
+                    }`}></div>
                     
                     <div className="flex items-center gap-4 relative z-10">
                       <div className="relative group/avatar">
@@ -102,11 +110,15 @@ const NewLearnersPage = () => {
                       </div>
 
                       <div className="flex-1">
-                        <h3 className="font-bold text-lg group-hover:text-primary transition-colors">
+                        <h3 className={`font-bold text-lg group-hover:text-primary transition-colors ${
+                          isDarkMode ? '' : 'text-gray-200'
+                        }`}>
                           {user.fullName}
                         </h3>
                         {user.location && (
-                          <div className="flex items-center text-sm opacity-70 mt-1 gap-1">
+                          <div className={`flex items-center text-sm mt-1 gap-1 ${
+                            isDarkMode ? 'opacity-70' : 'text-gray-400'
+                          }`}>
                             <MapPinIcon className="size-4 text-primary" />
                             {user.location}
                           </div>
@@ -127,17 +139,23 @@ const NewLearnersPage = () => {
                     </div>
 
                     {user.bio && (
-                      <div className="bg-base-300/50 rounded-lg p-3 relative z-10">
-                        <p className="text-sm leading-relaxed line-clamp-3">{user.bio}</p>
+                      <div className={`rounded-lg p-3 relative z-10 ${
+                        isDarkMode ? 'bg-base-300/50' : 'bg-gray-900/50'
+                      }`}>
+                        <p className={`text-sm leading-relaxed line-clamp-3 ${
+                          isDarkMode ? '' : 'text-gray-300'
+                        }`}>{user.bio}</p>
                       </div>
                     )}
 
                     {/* Action button */}
                     <button
-                      className={`btn w-full mt-2 gap-2 relative z-10 shadow-lg hover:shadow-xl transition-all duration-300 ${
+                      className={`w-full mt-2 gap-2 relative z-10 shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg px-4 py-3 font-semibold flex items-center justify-center ${
                         hasRequestBeenSent 
-                          ? "btn-success" 
-                          : "btn-primary hover:scale-[1.02] active:scale-[0.98]"
+                          ? isDarkMode 
+                            ? "bg-white hover:bg-gray-100 text-gray-900 border-2 border-gray-300" 
+                            : "bg-gray-700 hover:bg-gray-600 text-white border-2 border-gray-700"
+                          : "btn btn-primary hover:scale-[1.02] active:scale-[0.98]"
                       }`}
                       onClick={() => sendRequestMutation(user._id)}
                       disabled={hasRequestBeenSent || isPending}
