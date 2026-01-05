@@ -55,13 +55,15 @@ const OnboardingPage = () => {
       <div className="absolute top-0 left-0 w-96 h-96 bg-blue-100/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-100/30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
       
-      <div className="relative border border-[#2563EB]/30 w-full max-w-4xl mx-auto bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A] backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden">
+      <div className="relative card hover:shadow-xl transition-all duration-500 border border-[#2563EB]/30 hover:border-[#2563EB]/50 w-full max-w-4xl mx-auto bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A] backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden">
         {/* Decorative top bar */}
         <div className="h-2 bg-gradient-to-r from-[#2563EB] via-blue-400 to-[#1E3A8A]"></div>
         
-        <div className="p-8 sm:p-12">
+        <div className="card-body p-8 sm:p-12 relative overflow-hidden">
+          {/* Animated background effect */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#2563EB]/20 to-transparent rounded-full blur-3xl"></div>
           {/* Header Section */}
-          <div className="text-center mb-10">
+          <div className="text-center mb-10 relative z-10">
             <div className="relative inline-flex items-center justify-center mb-6">
               <div className="absolute inset-0 bg-gradient-to-r from-[#2563EB] to-[#1E3A8A] rounded-full blur-xl opacity-30 animate-pulse"></div>
               <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-[#2563EB]/30 to-[#1E3A8A]/30 flex items-center justify-center ring-4 ring-[#2563EB]/20">
@@ -76,13 +78,13 @@ const OnboardingPage = () => {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-8">
+          <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
             {/* PROFILE PIC CONTAINER */}
-            <div className="flex flex-col items-center justify-center space-y-6 bg-gradient-to-br from-[#2563EB]/10 to-[#1E3A8A]/10 rounded-2xl p-8 border border-[#2563EB]/20">
+            <div className="flex flex-col items-center justify-center space-y-6 bg-white/5 rounded-2xl p-8 border border-[#2563EB]/20 hover:border-[#2563EB]/40 transition-all duration-300">
               {/* IMAGE PREVIEW with animated gradient border */}
               <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#2563EB] via-blue-400 to-[#1E3A8A] rounded-full blur opacity-30 group-hover:opacity-50 transition duration-500 animate-pulse"></div>
-                <div className="relative size-40 rounded-full bg-gradient-to-br from-[#1E3A8A]/50 to-[#0B1F4B]/50 overflow-hidden ring-4 ring-[#2563EB]/30 shadow-xl">
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#2563EB] via-blue-400 to-[#1E3A8A] rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500 animate-pulse"></div>
+                <div className="relative size-40 rounded-full bg-gradient-to-br from-[#1E3A8A]/50 to-[#0B1F4B]/50 overflow-hidden ring-4 ring-[#2563EB]/40 shadow-xl">
                   {formState.profilePic ? (
                     <img
                       src={formState.profilePic}
@@ -101,7 +103,7 @@ const OnboardingPage = () => {
               <button 
                 type="button" 
                 onClick={handleRandomAvatar} 
-                className="btn btn-accent gap-2 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="btn btn-accent gap-2 hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 <ShuffleIcon className="size-5" />
                 Generate Random Avatar
@@ -113,7 +115,7 @@ const OnboardingPage = () => {
               {/* FULL NAME */}
               <div className="form-control lg:col-span-2 group">
                 <label className="label">
-                  <span className="label-text font-semibold flex items-center gap-2 text-base text-blue-200">
+                  <span className="label-text font-semibold flex items-center gap-2 text-base text-white">
                     <div className="w-8 h-8 rounded-lg bg-[#2563EB]/20 flex items-center justify-center">
                       <User className="size-4 text-blue-300" />
                     </div>
@@ -125,7 +127,7 @@ const OnboardingPage = () => {
                   name="fullName"
                   value={formState.fullName}
                   onChange={(e) => setFormState({ ...formState, fullName: e.target.value })}
-                  className="input input-bordered w-full focus:input-primary transition-all hover:border-primary/50 h-12 bg-[#1E3A8A]/30 border-[#2563EB]/30 text-white"
+                  className="input input-bordered w-full focus:input-primary transition-all hover:border-primary/50 h-12 bg-white/10 border-[#2563EB]/30 text-white placeholder:text-blue-200/50"
                   placeholder="Your full name"
                 />
               </div>
@@ -133,7 +135,7 @@ const OnboardingPage = () => {
               {/* BIO */}
               <div className="form-control lg:col-span-2 group">
                 <label className="label">
-                  <span className="label-text font-semibold flex items-center gap-2 text-base text-blue-200">
+                  <span className="label-text font-semibold flex items-center gap-2 text-base text-white">
                     <div className="w-8 h-8 rounded-lg bg-[#2563EB]/20 flex items-center justify-center">
                       <MessageSquare className="size-4 text-blue-300" />
                     </div>
@@ -144,7 +146,7 @@ const OnboardingPage = () => {
                   name="bio"
                   value={formState.bio}
                   onChange={(e) => setFormState({ ...formState, bio: e.target.value })}
-                  className="textarea textarea-bordered h-32 focus:textarea-primary transition-all hover:border-primary/50 resize-none bg-[#1E3A8A]/30 border-[#2563EB]/30 text-white"
+                  className="textarea textarea-bordered h-32 focus:textarea-primary transition-all hover:border-primary/50 resize-none bg-white/10 border-[#2563EB]/30 text-white placeholder:text-blue-200/50"
                   placeholder="Tell others about yourself and your language learning goals..."
                 />
               </div>
@@ -152,7 +154,7 @@ const OnboardingPage = () => {
               {/* NATIVE LANGUAGE */}
               <div className="form-control group">
                 <label className="label">
-                  <span className="label-text font-semibold flex items-center gap-2 text-base text-blue-200">
+                  <span className="label-text font-semibold flex items-center gap-2 text-base text-white">
                     <div className="w-8 h-8 rounded-lg bg-[#2563EB]/20 flex items-center justify-center">
                       <Globe className="size-4 text-blue-300" />
                     </div>
@@ -163,7 +165,7 @@ const OnboardingPage = () => {
                   name="nativeLanguage"
                   value={formState.nativeLanguage}
                   onChange={(e) => setFormState({ ...formState, nativeLanguage: e.target.value })}
-                  className="select select-bordered w-full focus:select-primary transition-all hover:border-primary/50 h-12 bg-[#1E3A8A]/30 border-[#2563EB]/30 text-white"
+                  className="select select-bordered w-full focus:select-primary transition-all hover:border-primary/50 h-12 bg-white/10 border-[#2563EB]/30 text-white"
                 >
                   <option value="">Select your native language</option>
                   {LANGUAGES.map((lang) => (
@@ -177,7 +179,7 @@ const OnboardingPage = () => {
               {/* LEARNING LANGUAGE */}
               <div className="form-control group">
                 <label className="label">
-                  <span className="label-text font-semibold flex items-center gap-2 text-base text-blue-200">
+                  <span className="label-text font-semibold flex items-center gap-2 text-base text-white">
                     <div className="w-8 h-8 rounded-lg bg-[#1E3A8A]/30 flex items-center justify-center">
                       <Globe className="size-4 text-blue-300" />
                     </div>
@@ -188,7 +190,7 @@ const OnboardingPage = () => {
                   name="learningLanguage"
                   value={formState.learningLanguage}
                   onChange={(e) => setFormState({ ...formState, learningLanguage: e.target.value })}
-                  className="select select-bordered w-full focus:select-primary transition-all hover:border-primary/50 h-12 bg-[#1E3A8A]/30 border-[#2563EB]/30 text-white"
+                  className="select select-bordered w-full focus:select-primary transition-all hover:border-primary/50 h-12 bg-white/10 border-[#2563EB]/30 text-white"
                 >
                   <option value="">Select language you're learning</option>
                   {LANGUAGES.map((lang) => (
@@ -202,7 +204,7 @@ const OnboardingPage = () => {
               {/* LOCATION */}
               <div className="form-control lg:col-span-2 group">
                 <label className="label">
-                  <span className="label-text font-semibold flex items-center gap-2 text-base text-blue-200">
+                  <span className="label-text font-semibold flex items-center gap-2 text-base text-white">
                     <div className="w-8 h-8 rounded-lg bg-[#2563EB]/20 flex items-center justify-center">
                       <MapPinIcon className="size-4 text-blue-300" />
                     </div>
@@ -216,7 +218,7 @@ const OnboardingPage = () => {
                     name="location"
                     value={formState.location}
                     onChange={(e) => setFormState({ ...formState, location: e.target.value })}
-                    className="input input-bordered w-full pl-12 focus:input-primary transition-all hover:border-primary/50 h-12 bg-[#1E3A8A]/30 border-[#2563EB]/30 text-white"
+                    className="input input-bordered w-full pl-12 focus:input-primary transition-all hover:border-primary/50 h-12 bg-white/10 border-[#2563EB]/30 text-white placeholder:text-blue-200/50"
                     placeholder="City, Country"
                   />
                 </div>
@@ -247,7 +249,7 @@ const OnboardingPage = () => {
           </form>
 
           {/* Footer hint with icon */}
-          <div className="flex items-center justify-center gap-2 text-center text-sm text-blue-200/70 mt-8">
+          <div className="flex items-center justify-center gap-2 text-center text-sm text-blue-100 mt-8">
             <Sparkles className="size-4" />
             <p>You can always update these details later from your profile settings</p>
           </div>
