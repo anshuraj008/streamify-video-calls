@@ -8,8 +8,8 @@ const Sidebar = () => {
   const currentPath = location.pathname;
 
   return (
-    <aside className="w-64 border-r h-screen sticky top-0 hidden lg:flex flex-col bg-[#101831] border-[#2563EB]/30">
-      <div className="p-5 border-b border-[#2563EB]/30">
+    <aside className="w-64 h-screen sticky top-0 hidden lg:flex flex-col bg-[#101831]">
+      <div className="p-5">
         <Link to="/home" className="flex items-center gap-2.5">
           <ShipWheelIcon className="size-9 text-white" />
           <span className="text-3xl font-bold font-mono text-white tracking-wider">
@@ -59,7 +59,7 @@ const Sidebar = () => {
       </nav>
 
       {/* USER PROFILE SECTION */}
-      <div className="p-4 border-t mt-auto border-[#2563EB]/30">
+      <div className="p-4 mt-auto">
         <div className="flex items-center gap-3">
           <div className="avatar">
             <div className="w-10 rounded-full">
