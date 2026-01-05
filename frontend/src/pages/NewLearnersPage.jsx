@@ -42,10 +42,10 @@ const NewLearnersPage = () => {
   return (
     <div className="p-4 sm:p-6 lg:p-8 animate-in fade-in duration-500">
       <div className="container mx-auto">
-        <div className="mb-8 bg-gradient-to-r from-secondary/5 via-transparent to-primary/5 p-6 rounded-2xl border border-secondary/10 animate-in slide-in-from-top-4 duration-700">
+        <div className="mb-8 bg-gradient-to-r from-emerald-50 via-green-50 to-emerald-50 p-6 rounded-2xl border border-emerald-200 animate-in slide-in-from-top-4 duration-700">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent mb-2">
+              <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent mb-2">
                 Meet New Learners
               </h2>
               <p className="text-base opacity-70">
@@ -77,15 +77,15 @@ const NewLearnersPage = () => {
               return (
                 <div
                   key={user._id}
-                  className="card bg-base-200 hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] border border-primary/10 hover:border-primary/30 group animate-in fade-in slide-in-from-bottom-8 duration-700"
+                  className="card bg-base-200 hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] border border-emerald-100 hover:border-emerald-300 group animate-in fade-in slide-in-from-bottom-8 duration-700"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className="card-body p-6 space-y-4 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-emerald-100 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
                     
                     <div className="flex items-center gap-4 relative z-10">
                       <div className="relative group/avatar">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-full blur opacity-30 group-hover/avatar:opacity-60 transition duration-500"></div>
+                        <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full blur opacity-30 group-hover/avatar:opacity-60 transition duration-500"></div>
                         <div className="avatar size-20 rounded-full ring-2 ring-base-100 relative">
                           <img src={user.profilePic} alt={user.fullName} className="rounded-full" />
                         </div>

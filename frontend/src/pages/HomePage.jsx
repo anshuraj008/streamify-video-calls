@@ -179,26 +179,28 @@ const HomePage = () => {
         <div className="flex justify-end mb-4">
           <button
             onClick={toggleDarkMode}
-            className={`btn btn-circle shadow-lg transition-all duration-300 ${
+            className={`btn btn-circle shadow-lg transition-all duration-300 border-2 ${
               isDarkMode 
-                ? 'bg-gradient-to-br from-white to-gray-100 hover:from-gray-100 hover:to-gray-200 border-primary/20' 
-                : 'bg-gradient-to-br from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 border-primary/30'
+                ? 'bg-gradient-to-br from-emerald-50 to-green-50 hover:from-emerald-100 hover:to-green-100 border-emerald-200' 
+                : 'bg-gradient-to-br from-gray-900 to-black hover:from-gray-800 hover:to-gray-900 border-gray-700'
             }`}
             aria-label="Toggle day/night mode"
           >
             {isDarkMode ? (
-              <Sun className="size-6 text-yellow-400 animate-in spin-in duration-500" />
+              <Sun className="size-6 text-yellow-500 animate-in spin-in duration-500" />
             ) : (
               <Moon className="size-6 text-yellow-100 animate-in spin-in duration-500" />
             )}
           </button>
         </div>
 
-        <div className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 p-6 rounded-2xl border backdrop-blur-sm animate-in slide-in-from-top-4 duration-700 ${
-          isDarkMode ? 'border-primary/10' : 'border-primary/30'
-        }`}>
+        <div className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border backdrop-blur-sm animate-in slide-in-from-top-4 duration-700 ${
+          isDarkMode 
+            ? 'bg-gradient-to-r from-emerald-50 via-green-50 to-emerald-50 border-emerald-200' 
+            : 'bg-gradient-to-r from-emerald-900/30 via-green-900/30 to-emerald-900/30 border-emerald-700/50'
+        } p-6`}>
           <div>
-            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-1">Your Friends</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent mb-1">Your Friends</h2>
             <p className={`text-sm transition-colors ${isDarkMode ? 'opacity-60' : 'text-gray-400'}`}>
               Connect and practice languages together
             </p>
