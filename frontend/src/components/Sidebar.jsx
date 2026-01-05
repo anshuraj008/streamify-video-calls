@@ -8,11 +8,11 @@ const Sidebar = () => {
   const currentPath = location.pathname;
 
   return (
-    <aside className="w-64 border-r h-screen sticky top-0 hidden lg:flex flex-col bg-[#0B1F4B] border-[#2563EB]/30">
+    <aside className="w-64 border-r h-screen sticky top-0 hidden lg:flex flex-col bg-[#101831] border-[#2563EB]/30">
       <div className="p-5 border-b border-[#2563EB]/30">
         <Link to="/home" className="flex items-center gap-2.5">
-          <ShipWheelIcon className="size-9 text-[#2563EB]" />
-          <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-300 tracking-wider">
+          <ShipWheelIcon className="size-9 text-white" />
+          <span className="text-3xl font-bold font-mono text-white tracking-wider">
             Streamify
           </span>
         </Link>
@@ -21,39 +21,39 @@ const Sidebar = () => {
       <nav className="flex-1 p-4 space-y-1">
         <a
           href="/"
-          className="btn btn-ghost justify-start w-full gap-3 px-3 normal-case text-blue-200 hover:bg-[#1E3A8A]/50"
+          className="btn btn-ghost justify-start w-full gap-3 px-3 normal-case text-white hover:bg-[#1E3A8A]/50"
         >
-          <LayoutDashboard className="size-5 opacity-70 text-blue-300" />
+          <LayoutDashboard className="size-5 text-white" />
           <span>Dashboard</span>
         </a>
 
         <Link
           to="/home"
-          className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case text-blue-200 hover:bg-[#1E3A8A]/50 ${
+          className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case text-white hover:bg-[#1E3A8A]/50 ${
             currentPath === "/home" ? "btn-active" : ""
           }`}
         >
-          <HomeIcon className="size-5 opacity-70 text-blue-300" />
+          <HomeIcon className="size-5 text-white" />
           <span>Home</span>
         </Link>
 
         <Link
           to="/new"
-          className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case text-blue-200 hover:bg-[#1E3A8A]/50 ${
+          className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case text-white hover:bg-[#1E3A8A]/50 ${
             currentPath === "/new" ? "btn-active" : ""
           }`}
         >
-          <Sparkles className="size-5 opacity-70 text-blue-300" />
+          <Sparkles className="size-5 text-white" />
           <span>New</span>
         </Link>
 
         <Link
           to="/notifications"
-          className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case text-blue-200 hover:bg-[#1E3A8A]/50 ${
+          className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case text-white hover:bg-[#1E3A8A]/50 ${
             currentPath === "/notifications" ? "btn-active" : ""
           }`}
         >
-          <BellIcon className="size-5 opacity-70 text-blue-300" />
+          <BellIcon className="size-5 text-white" />
           <span>Notifications</span>
         </Link>
       </nav>
