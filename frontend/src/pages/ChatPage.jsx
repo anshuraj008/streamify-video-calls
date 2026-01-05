@@ -6,7 +6,6 @@ import { getStreamToken } from "../lib/api";
 
 import {
   Channel,
-  ChannelHeader,
   Chat,
   MessageInput,
   MessageList,
@@ -21,6 +20,7 @@ import toast from "react-hot-toast";
 import ChatLoader from "../components/ChatLoader";
 import CallButton from "../components/CallButton";
 import MessageStatus from "../components/MessageStatus";
+import CustomChannelHeader from "../components/CustomChannelHeader";
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
 
@@ -214,7 +214,7 @@ const ChatPage = () => {
             <div className="w-full h-full relative">
               <CallButton handleVideoCall={handleVideoCall} />
               <Window>
-                <ChannelHeader />
+                <CustomChannelHeader />
                 <MessageList />
                 <MessageInput focus />
               </Window>
