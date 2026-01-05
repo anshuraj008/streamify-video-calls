@@ -49,12 +49,15 @@ const HomePage = () => {
   }, [outgoingFriendReqs]);
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8">
+    <div className="p-4 sm:p-6 lg:p-8 animate-in fade-in duration-500">
       <div className="container mx-auto space-y-10">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Your Friends</h2>
-          <Link to="/notifications" className="btn btn-outline btn-sm">
-            <UsersIcon className="mr-2 size-4" />
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 p-6 rounded-2xl border border-primary/10 backdrop-blur-sm animate-in slide-in-from-top-4 duration-700">
+          <div>
+            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-1">Your Friends</h2>
+            <p className="text-sm opacity-60">Connect and practice languages together</p>
+          </div>
+          <Link to="/notifications" className="btn btn-primary gap-2 shadow-lg hover:scale-105 transition-all duration-300">
+            <UsersIcon className="size-5" />
             Friend Requests
           </Link>
         </div>
@@ -66,20 +69,26 @@ const HomePage = () => {
         ) : friends.length === 0 ? (
           <NoFriendsFound />
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {friends.map((friend) => (
-              <FriendCard key={friend._id} friend={friend} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {friends.map((friend, index) => (
+              <div
+                key={friend._id}
+                className="animate-in fade-in slide-in-from-bottom-4 duration-500"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <FriendCard friend={friend} />
+              </div>
             ))}
           </div>
         )}
 
-        <section>
-          <div className="mb-6 sm:mb-8">
+        <section className="animate-in fade-in slide-in-from-bottom-6 duration-700 delay-300">
+          <div className="mb-8 bg-gradient-to-r from-secondary/5 via-transparent to-primary/5 p-6 rounded-2xl border border-secondary/10">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Meet New Learners</h2>
-                <p className="opacity-70">
-                  Discover perfect language exchange partners based on your profile
+                <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent mb-2">Meet New Learners</h2>
+                <p className="text-base opacity-70">
+                  ✨ Discover perfect language exchange partners based on your profile
                 </p>
               </div>
             </div>
@@ -98,25 +107,30 @@ const HomePage = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {recommendedUsers.map((user) => {
+              {recommendedUsers.map((user, index) => {
                 const hasRequestBeenSent = outgoingRequestsIds.has(user._id);
 
                 return (
                   <div
                     key={user._id}
-                    className="card bg-base-200 hover:shadow-lg transition-all duration-300"
+                    className="card bg-base-200 hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] border border-primary/10 hover:border-primary/30 group animate-in fade-in slide-in-from-bottom-8 duration-700"
+                    style={{ animationDelay: `${index * 150}ms` }}
                   >
-                    <div className="card-body p-5 space-y-4">
-                      <div className="flex items-center gap-3">
-                        <div className="avatar size-16 rounded-full">
-                          <img src={user.profilePic} alt={user.fullName} />
+                    <div className="card-body p-6 space-y-4 relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                      <div className="flex items-center gap-4 relative z-10">
+                        <div className="relative group/avatar">
+                          <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-full blur opacity-30 group-hover/avatar:opacity-60 transition duration-500"></div>
+                          <div className="avatar size-20 rounded-full ring-2 ring-base-100 relative">
+                            <img src={user.profilePic} alt={user.fullName} className="rounded-full" />
+                          </div>
                         </div>
 
-                        <div>
-                          <h3 className="font-semibold text-lg">{user.fullName}</h3>
+                        <div className="flex-1">
+                          <h3 className="font-bold text-lg group-hover:text-primary transition-colors">{user.fullName}</h3>
                           {user.location && (
-                            <div className="flex items-center text-xs opacity-70 mt-1">
-                              <MapPinIcon className="size-3 mr-1" />
+                            <div className="flex items-center text-sm opacity-70 mt-1 gap-1">
+                              <MapPinIcon className="size-4 text-primary" />
                               {user.location}
                             </div>
                           )}
@@ -124,36 +138,42 @@ const HomePage = () => {
                       </div>
 
                       {/* Languages with flags */}
-                      <div className="flex flex-wrap gap-1.5">
-                        <span className="badge badge-secondary">
+                      <div className="flex flex-wrap gap-2 relative z-10">
+                        <span className="badge badge-secondary gap-1 h-7 px-3 shadow-sm hover:scale-105 transition-transform">
                           {getLanguageFlag(user.nativeLanguage)}
-                          Native: {capitialize(user.nativeLanguage)}
+                          <span className="font-semibold">Native: {capitialize(user.nativeLanguage)}</span>
                         </span>
-                        <span className="badge badge-outline">
+                        <span className="badge badge-accent gap-1 h-7 px-3 shadow-sm hover:scale-105 transition-transform">
                           {getLanguageFlag(user.learningLanguage)}
-                          Learning: {capitialize(user.learningLanguage)}
+                          <span className="font-semibold">Learning: {capitialize(user.learningLanguage)}</span>
                         </span>
                       </div>
 
-                      {user.bio && <p className="text-sm opacity-70">{user.bio}</p>}
+                      {user.bio && (
+                        <div className="bg-base-300/50 rounded-lg p-3 relative z-10">
+                          <p className="text-sm leading-relaxed line-clamp-3">{user.bio}</p>
+                        </div>
+                      )}
 
                       {/* Action button */}
                       <button
-                        className={`btn w-full mt-2 ${
-                          hasRequestBeenSent ? "btn-disabled" : "btn-primary"
-                        } `}
+                        className={`btn w-full mt-2 gap-2 relative z-10 shadow-lg hover:shadow-xl transition-all duration-300 ${
+                          hasRequestBeenSent 
+                            ? "btn-success" 
+                            : "btn-primary hover:scale-[1.02] active:scale-[0.98]"
+                        }`}
                         onClick={() => sendRequestMutation(user._id)}
                         disabled={hasRequestBeenSent || isPending}
                       >
                         {hasRequestBeenSent ? (
                           <>
-                            <CheckCircleIcon className="size-4 mr-2" />
-                            Request Sent
+                            <CheckCircleIcon className="size-5" />
+                            <span className="font-semibold">Request Sent ✓</span>
                           </>
                         ) : (
                           <>
-                            <UserPlusIcon className="size-4 mr-2" />
-                            Send Friend Request
+                            <UserPlusIcon className="size-5" />
+                            <span className="font-semibold">Send Friend Request</span>
                           </>
                         )}
                       </button>

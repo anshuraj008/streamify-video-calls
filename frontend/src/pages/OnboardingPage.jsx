@@ -3,7 +3,7 @@ import useAuthUser from "../hooks/useAuthUser";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { completeOnboarding } from "../lib/api";
-import { LoaderIcon, MapPinIcon, ShipWheelIcon, ShuffleIcon } from "lucide-react";
+import { LoaderIcon, MapPinIcon, ShipWheelIcon, ShuffleIcon, Camera, Sparkles, User, MessageSquare, Globe } from "lucide-react";
 import { LANGUAGES } from "../constants";
 
 const OnboardingPage = () => {
@@ -46,79 +46,124 @@ const OnboardingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-base-100 flex items-center justify-center p-4">
-      <div className="card bg-base-200 w-full max-w-3xl shadow-xl">
-        <div className="card-body p-6 sm:p-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">Complete Your Profile</h1>
+    <div 
+      className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
+      data-theme="forest"
+    >
+      {/* Animated background elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5"></div>
+      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+      
+      <div className="relative border border-primary/25 w-full max-w-4xl mx-auto bg-base-100/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden">
+        {/* Decorative top bar */}
+        <div className="h-2 bg-gradient-to-r from-primary via-accent to-secondary"></div>
+        
+        <div className="p-8 sm:p-12">
+          {/* Header Section */}
+          <div className="text-center mb-10">
+            <div className="relative inline-flex items-center justify-center mb-6">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full blur-xl opacity-30 animate-pulse"></div>
+              <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center ring-4 ring-primary/10">
+                <Sparkles className="w-10 h-10 text-primary" />
+              </div>
+            </div>
+            <h1 className="text-4xl sm:text-5xl font-bold mb-3 bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+              Complete Your Profile
+            </h1>
+            <p className="text-base sm:text-lg opacity-70 max-w-2xl mx-auto">
+              Let's personalize your experience and connect you with the community
+            </p>
+          </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-8">
             {/* PROFILE PIC CONTAINER */}
-            <div className="flex flex-col items-center justify-center space-y-4">
-              {/* IMAGE PREVIEW */}
-              <div className="size-32 rounded-full bg-base-300 overflow-hidden">
-                {formState.profilePic ? (
-                  <img
-                    src={formState.profilePic}
-                    alt="Profile Preview"
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="flex items-center justify-center h-full">
-                    <CameraIcon className="size-12 text-base-content opacity-40" />
-                  </div>
-                )}
+            <div className="flex flex-col items-center justify-center space-y-6 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl p-8 border border-primary/10">
+              {/* IMAGE PREVIEW with animated gradient border */}
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-secondary rounded-full blur opacity-30 group-hover:opacity-50 transition duration-500 animate-pulse"></div>
+                <div className="relative size-40 rounded-full bg-gradient-to-br from-base-300 to-base-200 overflow-hidden ring-4 ring-base-100 shadow-xl">
+                  {formState.profilePic ? (
+                    <img
+                      src={formState.profilePic}
+                      alt="Profile Preview"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex items-center justify-center h-full bg-gradient-to-br from-primary/20 to-secondary/20">
+                      <Camera className="size-20 text-base-content/40" />
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Generate Random Avatar BTN */}
-              <div className="flex items-center gap-2">
-                <button type="button" onClick={handleRandomAvatar} className="btn btn-accent">
-                  <ShuffleIcon className="size-4 mr-2" />
-                  Generate Random Avatar
-                </button>
-              </div>
+              <button 
+                type="button" 
+                onClick={handleRandomAvatar} 
+                className="btn btn-accent gap-2 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                <ShuffleIcon className="size-5" />
+                Generate Random Avatar
+              </button>
             </div>
 
-            {/* FULL NAME */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Full Name</span>
-              </label>
-              <input
-                type="text"
-                name="fullName"
-                value={formState.fullName}
-                onChange={(e) => setFormState({ ...formState, fullName: e.target.value })}
-                className="input input-bordered w-full"
-                placeholder="Your full name"
-              />
-            </div>
-
-            {/* BIO */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Bio</span>
-              </label>
-              <textarea
-                name="bio"
-                value={formState.bio}
-                onChange={(e) => setFormState({ ...formState, bio: e.target.value })}
-                className="textarea textarea-bordered h-24"
-                placeholder="Tell others about yourself and your language learning goals"
-              />
-            </div>
-
-            {/* LANGUAGES */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* NATIVE LANGUAGE */}
-              <div className="form-control">
+            {/* Form Grid - Enhanced styling */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* FULL NAME */}
+              <div className="form-control lg:col-span-2 group">
                 <label className="label">
-                  <span className="label-text">Native Language</span>
+                  <span className="label-text font-semibold flex items-center gap-2 text-base">
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <User className="size-4 text-primary" />
+                    </div>
+                    Full Name
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  name="fullName"
+                  value={formState.fullName}
+                  onChange={(e) => setFormState({ ...formState, fullName: e.target.value })}
+                  className="input input-bordered w-full focus:input-primary transition-all hover:border-primary/50 h-12"
+                  placeholder="Your full name"
+                />
+              </div>
+
+              {/* BIO */}
+              <div className="form-control lg:col-span-2 group">
+                <label className="label">
+                  <span className="label-text font-semibold flex items-center gap-2 text-base">
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <MessageSquare className="size-4 text-primary" />
+                    </div>
+                    Bio
+                  </span>
+                </label>
+                <textarea
+                  name="bio"
+                  value={formState.bio}
+                  onChange={(e) => setFormState({ ...formState, bio: e.target.value })}
+                  className="textarea textarea-bordered h-32 focus:textarea-primary transition-all hover:border-primary/50 resize-none"
+                  placeholder="Tell others about yourself and your language learning goals..."
+                />
+              </div>
+
+              {/* NATIVE LANGUAGE */}
+              <div className="form-control group">
+                <label className="label">
+                  <span className="label-text font-semibold flex items-center gap-2 text-base">
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Globe className="size-4 text-primary" />
+                    </div>
+                    Native Language
+                  </span>
                 </label>
                 <select
                   name="nativeLanguage"
                   value={formState.nativeLanguage}
                   onChange={(e) => setFormState({ ...formState, nativeLanguage: e.target.value })}
-                  className="select select-bordered w-full"
+                  className="select select-bordered w-full focus:select-primary transition-all hover:border-primary/50 h-12"
                 >
                   <option value="">Select your native language</option>
                   {LANGUAGES.map((lang) => (
@@ -130,15 +175,20 @@ const OnboardingPage = () => {
               </div>
 
               {/* LEARNING LANGUAGE */}
-              <div className="form-control">
+              <div className="form-control group">
                 <label className="label">
-                  <span className="label-text">Learning Language</span>
+                  <span className="label-text font-semibold flex items-center gap-2 text-base">
+                    <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center">
+                      <Globe className="size-4 text-secondary" />
+                    </div>
+                    Learning Language
+                  </span>
                 </label>
                 <select
                   name="learningLanguage"
                   value={formState.learningLanguage}
                   onChange={(e) => setFormState({ ...formState, learningLanguage: e.target.value })}
-                  className="select select-bordered w-full"
+                  className="select select-bordered w-full focus:select-primary transition-all hover:border-primary/50 h-12"
                 >
                   <option value="">Select language you're learning</option>
                   {LANGUAGES.map((lang) => (
@@ -148,42 +198,59 @@ const OnboardingPage = () => {
                   ))}
                 </select>
               </div>
-            </div>
 
-            {/* LOCATION */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Location</span>
-              </label>
-              <div className="relative">
-                <MapPinIcon className="absolute top-1/2 transform -translate-y-1/2 left-3 size-5 text-base-content opacity-70" />
-                <input
-                  type="text"
-                  name="location"
-                  value={formState.location}
-                  onChange={(e) => setFormState({ ...formState, location: e.target.value })}
-                  className="input input-bordered w-full pl-10"
-                  placeholder="City, Country"
-                />
+              {/* LOCATION */}
+              <div className="form-control lg:col-span-2 group">
+                <label className="label">
+                  <span className="label-text font-semibold flex items-center gap-2 text-base">
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <MapPinIcon className="size-4 text-primary" />
+                    </div>
+                    Location
+                  </span>
+                </label>
+                <div className="relative">
+                  <MapPinIcon className="absolute top-1/2 transform -translate-y-1/2 left-4 size-5 text-primary/60" />
+                  <input
+                    type="text"
+                    name="location"
+                    value={formState.location}
+                    onChange={(e) => setFormState({ ...formState, location: e.target.value })}
+                    className="input input-bordered w-full pl-12 focus:input-primary transition-all hover:border-primary/50 h-12"
+                    placeholder="City, Country"
+                  />
+                </div>
               </div>
             </div>
 
-            {/* SUBMIT BUTTON */}
-
-            <button className="btn btn-primary w-full" disabled={isPending} type="submit">
-              {!isPending ? (
-                <>
-                  <ShipWheelIcon className="size-5 mr-2" />
-                  Complete Onboarding
-                </>
-              ) : (
-                <>
-                  <LoaderIcon className="animate-spin size-5 mr-2" />
-                  Onboarding...
-                </>
-              )}
+            {/* SUBMIT BUTTON with gradient */}
+            <button 
+              className="btn btn-primary w-full text-lg h-16 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg hover:shadow-2xl relative overflow-hidden group" 
+              disabled={isPending} 
+              type="submit"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <span className="relative flex items-center gap-3">
+                {!isPending ? (
+                  <>
+                    <ShipWheelIcon className="size-6" />
+                    Complete Onboarding
+                  </>
+                ) : (
+                  <>
+                    <LoaderIcon className="animate-spin size-6" />
+                    Setting up your profile...
+                  </>
+                )}
+              </span>
             </button>
           </form>
+
+          {/* Footer hint with icon */}
+          <div className="flex items-center justify-center gap-2 text-center text-sm opacity-60 mt-8">
+            <Sparkles className="size-4" />
+            <p>You can always update these details later from your profile settings</p>
+          </div>
         </div>
       </div>
     </div>
