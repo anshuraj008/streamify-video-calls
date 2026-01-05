@@ -165,11 +165,11 @@ const OnboardingPage = () => {
                   name="nativeLanguage"
                   value={formState.nativeLanguage}
                   onChange={(e) => setFormState({ ...formState, nativeLanguage: e.target.value })}
-                  className="select select-bordered w-full focus:select-primary transition-all hover:border-primary/50 h-12 bg-white/10 border-[#2563EB]/30 text-white"
+                  className="select select-bordered w-full focus:select-primary transition-all hover:border-primary/50 h-12 bg-white/10 border-[#2563EB]/30 text-white [&>option]:bg-[#1E3A8A] [&>option]:text-white"
                 >
-                  <option value="">Select your native language</option>
+                  <option value="" className="bg-[#1E3A8A] text-white">Select your native language</option>
                   {LANGUAGES.map((lang) => (
-                    <option key={`native-${lang}`} value={lang.toLowerCase()}>
+                    <option key={`native-${lang}`} value={lang.toLowerCase()} className="bg-[#1E3A8A] text-white">
                       {lang}
                     </option>
                   ))}
@@ -190,11 +190,11 @@ const OnboardingPage = () => {
                   name="learningLanguage"
                   value={formState.learningLanguage}
                   onChange={(e) => setFormState({ ...formState, learningLanguage: e.target.value })}
-                  className="select select-bordered w-full focus:select-primary transition-all hover:border-primary/50 h-12 bg-white/10 border-[#2563EB]/30 text-white"
+                  className="select select-bordered w-full focus:select-primary transition-all hover:border-primary/50 h-12 bg-white/10 border-[#2563EB]/30 text-white [&>option]:bg-[#1E3A8A] [&>option]:text-white"
                 >
-                  <option value="">Select language you're learning</option>
+                  <option value="" className="bg-[#1E3A8A] text-white">Select language you're learning</option>
                   {LANGUAGES.map((lang) => (
-                    <option key={`learning-${lang}`} value={lang.toLowerCase()}>
+                    <option key={`learning-${lang}`} value={lang.toLowerCase()} className="bg-[#1E3A8A] text-white">
                       {lang}
                     </option>
                   ))}
