@@ -16,9 +16,9 @@ const LandingPage = () => {
             <Link to="/" className="flex items-center gap-3 group">
               <div className="relative">
                 <div className="absolute inset-0 bg-blue-500 blur-xl opacity-50 group-hover:opacity-70 transition-opacity"></div>
-                <ShipWheelIcon className="size-10 text-blue-400 relative z-10 group-hover:rotate-180 transition-transform duration-700" />
+                <ShipWheelIcon className="size-10 text-white relative z-10 group-hover:rotate-180 transition-transform duration-700" />
               </div>
-              <span className="text-3xl font-bold font-mono bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent tracking-wider">
+              <span className="text-3xl font-bold font-mono text-white tracking-wider">
                 Streamify
               </span>
             </Link>
