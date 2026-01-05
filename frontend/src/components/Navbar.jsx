@@ -18,7 +18,7 @@ const Navbar = () => {
 
   return (
     <nav className="border-b sticky top-0 z-30 h-16 flex items-center bg-[#101831] border-[#2563EB]/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-end w-full">
           {/* LOGO - ONLY IN THE CHAT PAGE */}
           {isChatPage && (
