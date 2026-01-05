@@ -33,10 +33,10 @@ const NotificationsPage = () => {
       <div className="container mx-auto max-w-4xl space-y-8">
         <div className={`p-6 rounded-2xl border backdrop-blur-sm animate-in slide-in-from-top-4 duration-700 ${
           isDarkMode
-            ? 'bg-gradient-to-r from-emerald-50 via-green-50 to-emerald-50 border-emerald-200'
-            : 'bg-gradient-to-r from-emerald-900/30 via-green-900/30 to-emerald-900/30 border-emerald-700/50'
+            ? 'bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 border-blue-200'
+            : 'bg-gradient-to-r from-blue-900/30 via-blue-800/30 to-blue-900/30 border-blue-700/50'
         }`}>
-          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent mb-1">Notifications</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-1">Notifications</h1>
           <p className="text-sm opacity-60">Stay updated with your friend requests and connections</p>
         </div>
 
@@ -48,9 +48,9 @@ const NotificationsPage = () => {
           <>
             {incomingRequests.length > 0 && (
               <section className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <div className="flex items-center gap-3 bg-emerald-50 p-4 rounded-xl border border-emerald-200">
-                  <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
-                    <UserCheckIcon className="h-6 w-6 text-emerald-600" />
+                <div className="flex items-center gap-3 bg-blue-50 p-4 rounded-xl border border-blue-200">
+                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <UserCheckIcon className="h-6 w-6 text-blue-600" />
                   </div>
                   <div className="flex-1">
                     <h2 className="text-xl font-bold">Friend Requests</h2>
@@ -63,16 +63,16 @@ const NotificationsPage = () => {
                   {incomingRequests.map((request, index) => (
                     <div
                       key={request._id}
-                      className="card bg-base-200 hover:shadow-xl transition-all duration-500 hover:scale-[1.01] border border-emerald-100 hover:border-emerald-300 group animate-in fade-in slide-in-from-left-4 duration-500"
+                      className="card bg-base-200 hover:shadow-xl transition-all duration-500 hover:scale-[1.01] border border-blue-100 hover:border-blue-300 group animate-in fade-in slide-in-from-left-4 duration-500"
                       style={{ animationDelay: `${index * 100}ms` }}
                     >
                       <div className="card-body p-5 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-emerald-100 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-100 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
                         
                         <div className="flex items-center justify-between relative z-10">
                           <div className="flex items-center gap-4">
                             <div className="relative">
-                              <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+                              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
                               <div className="avatar w-16 h-16 rounded-full ring-2 ring-base-100 relative">
                                 <img src={request.sender.profilePic} alt={request.sender.fullName} className="rounded-full" />
                               </div>
@@ -109,9 +109,9 @@ const NotificationsPage = () => {
             {/* ACCEPTED REQS NOTIFICATONS */}
             {acceptedRequests.length > 0 && (
               <section className="space-y-4 animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
-                <div className="flex items-center gap-3 bg-emerald-50 p-4 rounded-xl border border-emerald-200">
-                  <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
-                    <BellIcon className="h-6 w-6 text-emerald-600" />
+                <div className="flex items-center gap-3 bg-blue-50 p-4 rounded-xl border border-blue-200">
+                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <BellIcon className="h-6 w-6 text-blue-600" />
                   </div>
                   <div>
                     <h2 className="text-xl font-bold">New Connections</h2>
@@ -123,15 +123,15 @@ const NotificationsPage = () => {
                   {acceptedRequests.map((notification, index) => (
                     <div 
                       key={notification._id} 
-                      className="card bg-base-200 hover:shadow-xl transition-all duration-500 hover:scale-[1.01] border border-emerald-100 hover:border-emerald-300 group animate-in fade-in slide-in-from-right-4 duration-500"
+                      className="card bg-base-200 hover:shadow-xl transition-all duration-500 hover:scale-[1.01] border border-blue-100 hover:border-blue-300 group animate-in fade-in slide-in-from-right-4 duration-500"
                       style={{ animationDelay: `${index * 100}ms` }}
                     >
                       <div className="card-body p-5 relative overflow-hidden">
-                        <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-emerald-100 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                        <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-blue-100 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
                         
                         <div className="flex items-start gap-4 relative z-10">
                           <div className="relative">
-                            <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+                            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
                             <div className="avatar size-14 rounded-full ring-2 ring-base-100 relative">
                               <img
                                 src={notification.recipient.profilePic}
@@ -141,8 +141,8 @@ const NotificationsPage = () => {
                             </div>
                           </div>
                           <div className="flex-1">
-                            <h3 className="font-bold text-base group-hover:text-emerald-600 transition-colors">{notification.recipient.fullName}</h3>
-                            <p className="text-sm my-2 bg-emerald-50 rounded-lg px-3 py-2 inline-block border border-emerald-200">
+                            <h3 className="font-bold text-base group-hover:text-blue-600 transition-colors">{notification.recipient.fullName}</h3>
+                            <p className="text-sm my-2 bg-blue-50 rounded-lg px-3 py-2 inline-block border border-blue-200">
                               <span className="font-semibold">{notification.recipient.fullName}</span> accepted your friend request ✓
                             </p>
                             <p className="text-xs flex items-center gap-1 opacity-70 mt-2">

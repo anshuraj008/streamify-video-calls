@@ -181,7 +181,7 @@ const HomePage = () => {
             onClick={toggleDarkMode}
             className={`btn btn-circle shadow-lg transition-all duration-300 border-2 ${
               isDarkMode 
-                ? 'bg-gradient-to-br from-emerald-50 to-green-50 hover:from-emerald-100 hover:to-green-100 border-emerald-200' 
+                ? 'bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 border-blue-200' 
                 : 'bg-gradient-to-br from-gray-900 to-black hover:from-gray-800 hover:to-gray-900 border-gray-700'
             }`}
             aria-label="Toggle day/night mode"
@@ -194,13 +194,13 @@ const HomePage = () => {
           </button>
         </div>
 
-        <div className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border backdrop-blur-sm animate-in slide-in-from-top-4 duration-700 ${
+        <div className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border backdrop-blur-sm animate-in slide-in-from-top-4 duration-700 p-6 ${
           isDarkMode 
-            ? 'bg-gradient-to-r from-emerald-50 via-green-50 to-emerald-50 border-emerald-200' 
-            : 'bg-gradient-to-r from-emerald-900/30 via-green-900/30 to-emerald-900/30 border-emerald-700/50'
-        } p-6`}>
+            ? 'bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 border-blue-200' 
+            : 'bg-gradient-to-r from-blue-900/30 via-blue-800/30 to-blue-900/30 border-blue-700/50'
+        }`}>
           <div>
-            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent mb-1">Your Friends</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-1">Your Friends</h2>
             <p className={`text-sm transition-colors ${isDarkMode ? 'opacity-60' : 'text-gray-400'}`}>
               Connect and practice languages together
             </p>

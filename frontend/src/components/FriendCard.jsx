@@ -9,8 +9,8 @@ const FriendCard = ({ friend, unreadCount = 0, isOnline = false }) => {
   return (
     <div className={`card hover:shadow-xl transition-all duration-500 hover:scale-[1.03] border group relative ${
       isDarkMode 
-        ? 'bg-base-200 border-emerald-100 hover:border-emerald-300' 
-        : 'bg-gray-800 border-gray-700 hover:border-emerald-700'
+        ? 'bg-base-200 border-blue-100 hover:border-blue-300' 
+        : 'bg-gray-800 border-gray-700 hover:border-blue-700'
     }`}>
       {/* Unread badge */}
       {unreadCount > 0 && (
@@ -27,12 +27,12 @@ const FriendCard = ({ friend, unreadCount = 0, isOnline = false }) => {
       
       <div className="card-body p-5 relative overflow-hidden">
         {/* Animated background effect */}
-        <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-emerald-100 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+        <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-100 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
         
         {/* USER INFO */}
         <div className="flex items-center gap-3 mb-4 relative z-10">
           <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full blur opacity-0 group-hover:opacity-40 transition duration-500"></div>
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full blur opacity-0 group-hover:opacity-40 transition duration-500"></div>
             <div className="avatar size-14 rounded-full ring-2 ring-base-100 relative">
               <img src={friend.profilePic} alt={friend.fullName} className="rounded-full" />
               {/* Online/Offline status indicator */}

@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router";
 import useAuthUser from "../hooks/useAuthUser";
-import { BellIcon, HomeIcon, ShipWheelIcon, Sparkles } from "lucide-react";
+import { BellIcon, HomeIcon, ShipWheelIcon, Sparkles, LayoutDashboard } from "lucide-react";
 import { useThemeStore } from "../store/useThemeStore";
 
 const Sidebar = () => {
@@ -18,7 +18,7 @@ const Sidebar = () => {
       <div className={`p-5 border-b transition-colors ${
         isDarkMode ? 'border-gray-300' : 'border-gray-800'
       }`}>
-        <Link to="/" className="flex items-center gap-2.5">
+        <Link to="/home" className="flex items-center gap-2.5">
           <ShipWheelIcon className="size-9 text-primary" />
           <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary  tracking-wider">
             Streamify
@@ -27,10 +27,20 @@ const Sidebar = () => {
       </div>
 
       <nav className="flex-1 p-4 space-y-1">
-        <Link
-          to="/"
+        <a
+          href="/"
           className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
-            currentPath === "/" ? "btn-active" : ""
+            isDarkMode ? 'text-gray-900 hover:bg-gray-100' : 'text-gray-100 hover:bg-gray-800'
+          }`}
+        >
+          <LayoutDashboard className={`size-5 opacity-70 ${isDarkMode ? 'text-gray-700' : 'text-gray-300'}`} />
+          <span>Dashboard</span>
+        </a>
+
+        <Link
+          to="/home"
+          className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
+            currentPath === "/home" ? "btn-active" : ""
           } ${isDarkMode ? 'text-gray-900 hover:bg-gray-100' : 'text-gray-100 hover:bg-gray-800'}`}
         >
           <HomeIcon className={`size-5 opacity-70 ${isDarkMode ? 'text-gray-700' : 'text-gray-300'}`} />

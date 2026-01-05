@@ -29,7 +29,7 @@ const Navbar = () => {
           {/* LOGO - ONLY IN THE CHAT PAGE */}
           {isChatPage && (
             <div className="pl-5">
-              <Link to="/" className="flex items-center gap-2.5">
+              <Link to="/home" className="flex items-center gap-2.5">
                 <ShipWheelIcon className="size-9 text-primary" />
                 <span className={`text-3xl font-bold font-mono tracking-wider transition-colors ${
                   isDarkMode 

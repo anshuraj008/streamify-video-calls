@@ -50,12 +50,12 @@ const NewLearnersPage = () => {
       <div className="container mx-auto">
         <div className={`mb-8 p-6 rounded-2xl border animate-in slide-in-from-top-4 duration-700 ${
           isDarkMode
-            ? 'bg-gradient-to-r from-emerald-50 via-green-50 to-emerald-50 border-emerald-200'
-            : 'bg-gradient-to-r from-emerald-900/30 via-green-900/30 to-emerald-900/30 border-emerald-700/50'
+            ? 'bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 border-blue-200'
+            : 'bg-gradient-to-r from-blue-900/30 via-blue-800/30 to-blue-900/30 border-blue-700/50'
         }`}>
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent mb-2">
+              <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-2">
                 Meet New Learners
               </h2>
               <p className="text-base opacity-70">
@@ -89,21 +89,21 @@ const NewLearnersPage = () => {
                   key={user._id}
                   className={`card hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] border group animate-in fade-in slide-in-from-bottom-8 duration-700 ${
                     isDarkMode
-                      ? 'bg-base-200 border-emerald-100 hover:border-emerald-300'
-                      : 'bg-gray-800 border-gray-700 hover:border-emerald-700'
+                      ? 'bg-base-200 border-blue-100 hover:border-blue-300'
+                      : 'bg-gray-800 border-gray-700 hover:border-blue-700'
                   }`}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className="card-body p-6 space-y-4 relative overflow-hidden">
                     <div className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700 ${
                       isDarkMode
-                        ? 'bg-gradient-to-br from-emerald-100 to-transparent'
-                        : 'bg-gradient-to-br from-emerald-900/30 to-transparent'
+                        ? 'bg-gradient-to-br from-blue-100 to-transparent'
+                        : 'bg-gradient-to-br from-blue-900/30 to-transparent'
                     }`}></div>
                     
                     <div className="flex items-center gap-4 relative z-10">
                       <div className="relative group/avatar">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full blur opacity-30 group-hover/avatar:opacity-60 transition duration-500"></div>
+                        <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full blur opacity-30 group-hover/avatar:opacity-60 transition duration-500"></div>
                         <div className="avatar size-20 rounded-full ring-2 ring-base-100 relative">
                           <img src={user.profilePic} alt={user.fullName} className="rounded-full" />
                         </div>

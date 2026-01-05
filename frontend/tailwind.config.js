@@ -11,16 +11,16 @@ export default {
     themes: [
       {
         streamify: {
-          "primary": "#22c55e",           // Deep Green-500
-          "primary-focus": "#16a34a",      // Deep Green-600
+          "primary": "#2563EB",           // Accent Blue
+          "primary-focus": "#1E3A8A",      // Secondary Blue
           "primary-content": "#ffffff",    // White text on primary
           
-          "secondary": "#4ade80",          // Green-400
-          "secondary-focus": "#22c55e",    // Green-500
+          "secondary": "#3B82F6",          // Blue-500
+          "secondary-focus": "#2563EB",    // Accent Blue
           "secondary-content": "#1f2937",  // Dark text on secondary
           
-          "accent": "#059669",             // Deep Emerald-600
-          "accent-focus": "#047857",       // Deep Emerald-700
+          "accent": "#1E3A8A",             // Secondary Blue
+          "accent-focus": "#0B1F4B",       // Primary Background Blue
           "accent-content": "#ffffff",     // White text on accent
           
           "neutral": "#1f2937",            // Gray-800 (dark)
@@ -33,7 +33,7 @@ export default {
           "base-content": "#1f2937",       // Gray-800 (dark text)
           
           "info": "#3b82f6",               // Blue-500
-          "success": "#10b981",            // Emerald-500
+          "success": "#2563EB",            // Accent Blue
           "warning": "#f59e0b",            // Amber-500
           "error": "#ef4444",              // Red-500
         },
