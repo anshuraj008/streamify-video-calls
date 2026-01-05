@@ -3,7 +3,7 @@ import { MessageCircle } from "lucide-react";
 import { getLanguageFlag } from "../lib/languageUtils.jsx";
 import { useThemeStore } from "../store/useThemeStore";
 
-const FriendCard = ({ friend, unreadCount = 0 }) => {
+const FriendCard = ({ friend, unreadCount = 0, isOnline = false }) => {
   const { isDarkMode } = useThemeStore();
   
   return (
@@ -35,14 +35,32 @@ const FriendCard = ({ friend, unreadCount = 0 }) => {
             <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-full blur opacity-0 group-hover:opacity-40 transition duration-500"></div>
             <div className="avatar size-14 rounded-full ring-2 ring-base-100 relative">
               <img src={friend.profilePic} alt={friend.fullName} className="rounded-full" />
+              {/* Online/Offline status indicator */}
+              <div className={`absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 ${
+                isDarkMode ? 'border-white' : 'border-gray-800'
+              } ${
+                isOnline ? 'bg-success' : 'bg-gray-400'
+              } transition-colors`}
+                title={isOnline ? 'Online' : 'Offline'}
+              />
               {unreadCount > 0 && (
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-error rounded-full border-2 border-base-100 animate-pulse"></div>
               )}
             </div>
           </div>
-          <h3 className={`font-bold text-base truncate group-hover:text-primary transition-colors ${
-            isDarkMode ? '' : 'text-gray-200'
-          }`}>{friend.fullName}</h3>
+          <div className="flex-1">
+            <h3 className={`font-bold text-base truncate group-hover:text-primary transition-colors ${
+              isDarkMode ? '' : 'text-gray-200'
+            }`}>{friend.fullName}</h3>
+            <p className={`text-xs flex items-center gap-1 transition-colors ${
+              isOnline ? 'text-success' : isDarkMode ? 'text-gray-500' : 'text-gray-400'
+            }`}>
+              <span className={`size-1.5 rounded-full ${
+                isOnline ? 'bg-success animate-pulse' : 'bg-gray-400'
+              }`} />
+              {isOnline ? 'Online' : 'Offline'}
+            </p>
+          </div>
         </div>
 
         <div className="flex flex-wrap gap-2 mb-4 relative z-10">

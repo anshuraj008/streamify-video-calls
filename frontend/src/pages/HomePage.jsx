@@ -17,6 +17,7 @@ const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
 
 const HomePage = () => {
   const [unreadCounts, setUnreadCounts] = useState({});
+  const [onlineStatus, setOnlineStatus] = useState({});
   const { authUser } = useAuthUser();
   const { isDarkMode, toggleDarkMode } = useThemeStore();
 
@@ -82,6 +83,42 @@ const HomePage = () => {
         };
 
         await updateUnreadCounts();
+
+        // Track user presence for all friends
+        const updatePresenceStatus = () => {
+          const status = {};
+          friends.forEach(friend => {
+            const user = chatClient.state.users[friend._id];
+            status[friend._id] = user?.online || false;
+          });
+          setOnlineStatus(status);
+        };
+
+        // Initial presence status
+        updatePresenceStatus();
+
+        // Listen for user presence changes
+        chatClient.on('user.presence.changed', (event) => {
+          if (event.user?.id) {
+            setOnlineStatus(prev => ({
+              ...prev,
+              [event.user.id]: event.user.online || false
+            }));
+          }
+        });
+
+        // Watch presence for all friends
+        try {
+          await chatClient.queryUsers(
+            { id: { $in: friends.map(f => f._id) } },
+            {},
+            { presence: true }
+          );
+          // Update presence after watching
+          updatePresenceStatus();
+        } catch (error) {
+          console.error('Error watching user presence:', error);
+        }
 
         // Create named handler functions that can be removed later
         messageHandler = (event) => {
@@ -186,7 +223,11 @@ const HomePage = () => {
                 className="animate-in fade-in slide-in-from-bottom-4 duration-500"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <FriendCard friend={friend} unreadCount={unreadCounts[friend._id] || 0} />
+                <FriendCard 
+                  friend={friend} 
+                  unreadCount={unreadCounts[friend._id] || 0}
+                  isOnline={onlineStatus[friend._id] || false}
+                />
               </div>
             ))}
           </div>

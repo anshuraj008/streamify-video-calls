@@ -31,7 +31,11 @@ const Navbar = () => {
             <div className="pl-5">
               <Link to="/" className="flex items-center gap-2.5">
                 <ShipWheelIcon className="size-9 text-primary" />
-                <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary  tracking-wider">
+                <span className={`text-3xl font-bold font-mono tracking-wider transition-colors ${
+                  isDarkMode 
+                    ? 'bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary'
+                    : 'text-primary'
+                }`}>
                   Streamify
                 </span>
               </Link>
@@ -39,9 +43,11 @@ const Navbar = () => {
           )}
 
           <div className="flex items-center gap-3 sm:gap-4 ml-auto">
-            <Link to={"/notifications"}>
+            <Link to="/notifications">
               <button className="btn btn-ghost btn-circle">
-                <BellIcon className="h-6 w-6 text-base-content opacity-70" />
+                <BellIcon className={`h-6 w-6 transition-colors ${
+                  isDarkMode ? 'text-gray-700' : 'text-gray-300'
+                }`} />
               </button>
             </Link>
           </div>
@@ -54,7 +60,9 @@ const Navbar = () => {
 
           {/* Logout button */}
           <button className="btn btn-ghost btn-circle" onClick={logoutMutation}>
-            <LogOutIcon className="h-6 w-6 text-base-content opacity-70" />
+            <LogOutIcon className={`h-6 w-6 transition-colors ${
+              isDarkMode ? 'text-gray-700' : 'text-gray-300'
+            }`} />
           </button>
         </div>
       </div>
