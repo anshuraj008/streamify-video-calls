@@ -10,8 +10,11 @@ const Sidebar = () => {
   return (
     <aside className="w-64 h-screen sticky top-0 hidden lg:flex flex-col bg-[#101831]">
       <div className="p-5">
-        <Link to="/home" className="flex items-center gap-2.5">
-          <ShipWheelIcon className="size-9 text-white" />
+        <Link to="/home" className="flex items-center gap-3 group">
+          <div className="relative">
+            <div className="absolute inset-0 bg-blue-500 blur-xl opacity-50 group-hover:opacity-70 transition-opacity"></div>
+            <ShipWheelIcon className="size-9 text-white relative z-10 group-hover:rotate-180 transition-transform duration-700" />
+          </div>
           <span className="text-3xl font-bold font-mono text-white tracking-wider">
             Streamify
           </span>
