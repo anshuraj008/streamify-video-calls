@@ -21,6 +21,32 @@ import CallButton from "../components/CallButton";
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
 
+// Function to show browser notification
+const showNotification = (senderName, messageText) => {
+  if ("Notification" in window && Notification.permission === "granted") {
+    const notification = new Notification(`💬 ${senderName}`, {
+      body: messageText || "Sent you a message",
+      icon: "/favicon.ico",
+      badge: "/favicon.ico",
+      tag: "chat-message",
+      requireInteraction: false,
+    });
+
+    // Play notification sound
+    const audio = new Audio("data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBStlyO7bozEFKXe/8OZ8NAocWrb36IxOEA1Ln+Lsr2MbBjiR1O/IbykFJHXE8Nx5Mg4PXLX36lxUFgQ=");
+    audio.play().catch(() => {}); // Ignore errors if audio fails
+
+    // Auto close notification after 5 seconds
+    setTimeout(() => notification.close(), 5000);
+
+    // Focus window when notification is clicked
+    notification.onclick = () => {
+      window.focus();
+      notification.close();
+    };
+  }
+};
+
 const ChatPage = () => {
   const { id: targetUserId } = useParams();
 
@@ -36,6 +62,17 @@ const ChatPage = () => {
     enabled: !!authUser, // this will run only when authUser is available
   });
 
+  // Request notification permission on mount
+  useEffect(() => {
+    if ("Notification" in window && Notification.permission === "default") {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          toast.success("Notifications enabled! 🔔");
+        }
+      });
+    }
+  }, []);
+
   useEffect(() => {
     const initChat = async () => {
       if (!tokenData?.token || !authUser) return;
@@ -45,14 +82,17 @@ const ChatPage = () => {
 
         const client = StreamChat.getInstance(STREAM_API_KEY);
 
-        await client.connectUser(
-          {
-            id: authUser._id,
-            name: authUser.fullName,
-            image: authUser.profilePic,
-          },
-          tokenData.token
-        );
+        // Check if already connected
+        if (!client.user) {
+          await client.connectUser(
+            {
+              id: authUser._id,
+              name: authUser.fullName,
+              image: authUser.profilePic,
+            },
+            tokenData.token
+          );
+        }
 
         //
         const channelId = [authUser._id, targetUserId].sort().join("-");
@@ -66,6 +106,23 @@ const ChatPage = () => {
         });
 
         await currChannel.watch();
+
+        // Listen for new messages and show notifications
+        const handleNewMessage = (event) => {
+          // Only show notification if:
+          // 1. Message is from other user (not yourself)
+          // 2. Page is not currently focused/visible
+          if (event.user.id !== authUser._id && document.hidden) {
+            showNotification(event.user.name, event.message.text);
+            
+            // Also show toast notification if user is on another page
+            toast.success(`💬 New message from ${event.user.name}`, {
+              duration: 4000,
+            });
+          }
+        };
+
+        currChannel.on("message.new", handleNewMessage);
 
         setChatClient(client);
         setChannel(currChannel);
