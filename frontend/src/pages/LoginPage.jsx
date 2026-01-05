@@ -115,17 +115,46 @@ const LoginPage = () => {
           </div>
         </div>
 
-        {/* IMAGE SECTION */}
-        <div className="hidden lg:flex w-full lg:w-1/2 bg-primary/10 items-center justify-center">
-          <div className="max-w-md p-8">
-            {/* Illustration */}
-            <div className="relative aspect-square max-w-sm mx-auto">
-              <img src="/i.png" alt="Language connection illustration" className="w-full h-full" />
+        {/* ANIMATED SECTION */}
+        <div className="hidden lg:flex w-full lg:w-1/2 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 items-center justify-center relative overflow-hidden">
+          {/* Animated Background Elements */}
+          <div className="absolute inset-0">
+            {/* Floating Circles */}
+            <div className="absolute top-10 left-10 w-32 h-32 bg-blue-400/20 rounded-full blur-2xl animate-pulse"></div>
+            <div className="absolute bottom-20 right-20 w-40 h-40 bg-blue-300/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+            <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-white/10 rounded-full blur-xl animate-bounce" style={{animationDelay: '2s'}}></div>
+            
+            {/* Animated Lines */}
+            <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
+            <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" style={{animationDelay: '1.5s'}}></div>
+          </div>
+
+          <div className="max-w-md p-8 relative z-10">
+            {/* Animated Icon Grid */}
+            <div className="grid grid-cols-3 gap-6 mb-8">
+              <div className="aspect-square bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center animate-float" style={{animationDelay: '0s'}}>
+                <div className="w-12 h-12 bg-white/20 rounded-full"></div>
+              </div>
+              <div className="aspect-square bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center animate-float" style={{animationDelay: '0.2s'}}>
+                <div className="w-12 h-12 bg-white/20 rounded-full"></div>
+              </div>
+              <div className="aspect-square bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center animate-float" style={{animationDelay: '0.4s'}}>
+                <div className="w-12 h-12 bg-white/20 rounded-full"></div>
+              </div>
+              <div className="aspect-square bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center animate-float" style={{animationDelay: '0.6s'}}>
+                <div className="w-12 h-12 bg-white/20 rounded-full"></div>
+              </div>
+              <div className="aspect-square bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center animate-float" style={{animationDelay: '0.8s'}}>
+                <div className="w-12 h-12 bg-white/20 rounded-full"></div>
+              </div>
+              <div className="aspect-square bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center animate-float" style={{animationDelay: '1s'}}>
+                <div className="w-12 h-12 bg-white/20 rounded-full"></div>
+              </div>
             </div>
 
-            <div className="text-center space-y-3 mt-6">
-              <h2 className="text-xl font-semibold">Connect with language partners worldwide</h2>
-              <p className="opacity-70">
+            <div className="text-center space-y-3 text-white">
+              <h2 className="text-2xl font-bold">Connect with language partners worldwide</h2>
+              <p className="text-blue-100">
                 Practice conversations, make friends, and improve your language skills together
               </p>
             </div>
