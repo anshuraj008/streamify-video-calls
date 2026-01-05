@@ -12,11 +12,11 @@ const Sidebar = () => {
   return (
     <aside className={`w-64 border-r h-screen sticky top-0 transition-colors hidden lg:flex flex-col ${
       isDarkMode 
-        ? 'bg-base-200 border-base-300' 
+        ? 'bg-white border-gray-300' 
         : 'bg-gray-900 border-gray-800'
     }`}>
       <div className={`p-5 border-b transition-colors ${
-        isDarkMode ? 'border-base-300' : 'border-gray-800'
+        isDarkMode ? 'border-gray-300' : 'border-gray-800'
       }`}>
         <Link to="/" className="flex items-center gap-2.5">
           <ShipWheelIcon className="size-9 text-primary" />
@@ -31,9 +31,9 @@ const Sidebar = () => {
           to="/"
           className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
             currentPath === "/" ? "btn-active" : ""
-          }`}
+          } ${isDarkMode ? 'text-gray-900 hover:bg-gray-100' : 'text-gray-100 hover:bg-gray-800'}`}
         >
-          <HomeIcon className="size-5 text-base-content opacity-70" />
+          <HomeIcon className={`size-5 opacity-70 ${isDarkMode ? 'text-gray-700' : 'text-gray-300'}`} />
           <span>Home</span>
         </Link>
 
@@ -41,9 +41,9 @@ const Sidebar = () => {
           to="/new"
           className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
             currentPath === "/new" ? "btn-active" : ""
-          }`}
+          } ${isDarkMode ? 'text-gray-900 hover:bg-gray-100' : 'text-gray-100 hover:bg-gray-800'}`}
         >
-          <Sparkles className="size-5 text-base-content opacity-70" />
+          <Sparkles className={`size-5 opacity-70 ${isDarkMode ? 'text-gray-700' : 'text-gray-300'}`} />
           <span>New</span>
         </Link>
 
@@ -51,16 +51,16 @@ const Sidebar = () => {
           to="/notifications"
           className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
             currentPath === "/notifications" ? "btn-active" : ""
-          }`}
+          } ${isDarkMode ? 'text-gray-900 hover:bg-gray-100' : 'text-gray-100 hover:bg-gray-800'}`}
         >
-          <BellIcon className="size-5 text-base-content opacity-70" />
+          <BellIcon className={`size-5 opacity-70 ${isDarkMode ? 'text-gray-700' : 'text-gray-300'}`} />
           <span>Notifications</span>
         </Link>
       </nav>
 
       {/* USER PROFILE SECTION */}
       <div className={`p-4 border-t mt-auto transition-colors ${
-        isDarkMode ? 'border-base-300' : 'border-gray-800'
+        isDarkMode ? 'border-gray-300' : 'border-gray-800'
       }`}>
         <div className="flex items-center gap-3">
           <div className="avatar">
@@ -70,7 +70,7 @@ const Sidebar = () => {
           </div>
           <div className="flex-1">
             <p className={`font-semibold text-sm transition-colors ${
-              isDarkMode ? '' : 'text-gray-200'
+              isDarkMode ? 'text-gray-900' : 'text-gray-200'
             }`}>{authUser?.fullName}</p>
             <p className="text-xs text-success flex items-center gap-1">
               <span className="size-2 rounded-full bg-success inline-block" />

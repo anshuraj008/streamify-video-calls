@@ -134,7 +134,7 @@ const HomePage = () => {
   return (
     <div className={`min-h-screen p-4 sm:p-6 lg:p-8 animate-in fade-in duration-500 transition-colors ${
       isDarkMode 
-        ? 'bg-gradient-to-br from-white via-gray-50 to-white' 
+        ? 'bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50' 
         : 'bg-gradient-to-br from-gray-900 via-black to-gray-900'
     }`}>
       <div className="container mx-auto space-y-10">
