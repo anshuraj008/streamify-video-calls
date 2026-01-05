@@ -1,10 +1,17 @@
 import { Link } from "react-router";
 import { MessageCircle } from "lucide-react";
 import { getLanguageFlag } from "../lib/languageUtils.jsx";
+import { useThemeStore } from "../store/useThemeStore";
 
 const FriendCard = ({ friend, unreadCount = 0 }) => {
+  const { isDarkMode } = useThemeStore();
+  
   return (
-    <div className="card bg-base-200 hover:shadow-xl transition-all duration-500 hover:scale-[1.03] border border-primary/10 hover:border-primary/30 group relative">
+    <div className={`card hover:shadow-xl transition-all duration-500 hover:scale-[1.03] border hover:border-primary/30 group relative ${
+      isDarkMode 
+        ? 'bg-base-200 border-primary/10' 
+        : 'bg-gray-800 border-gray-700'
+    }`}>
       {/* Unread badge */}
       {unreadCount > 0 && (
         <div className="absolute -top-2 -right-2 z-20">
@@ -33,7 +40,9 @@ const FriendCard = ({ friend, unreadCount = 0 }) => {
               )}
             </div>
           </div>
-          <h3 className="font-bold text-base truncate group-hover:text-primary transition-colors">{friend.fullName}</h3>
+          <h3 className={`font-bold text-base truncate group-hover:text-primary transition-colors ${
+            isDarkMode ? '' : 'text-gray-200'
+          }`}>{friend.fullName}</h3>
         </div>
 
         <div className="flex flex-wrap gap-2 mb-4 relative z-10">
