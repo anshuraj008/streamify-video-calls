@@ -2,9 +2,11 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { acceptFriendRequest, getFriendRequests } from "../lib/api";
 import { BellIcon, ClockIcon, MessageSquareIcon, UserCheckIcon } from "lucide-react";
 import NoNotificationsFound from "../components/NoNotificationsFound";
+import { useThemeStore } from "../store/useThemeStore";
 
 const NotificationsPage = () => {
   const queryClient = useQueryClient();
+  const { isDarkMode } = useThemeStore();
 
   const { data: friendRequests, isLoading } = useQuery({
     queryKey: ["friendRequests"],
@@ -23,9 +25,17 @@ const NotificationsPage = () => {
   const acceptedRequests = friendRequests?.acceptedReqs || [];
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 animate-in fade-in duration-500">
+    <div className={`min-h-screen p-4 sm:p-6 lg:p-8 animate-in fade-in duration-500 transition-colors ${
+      isDarkMode 
+        ? 'bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50' 
+        : 'bg-gradient-to-br from-gray-900 via-black to-gray-900'
+    }`}>
       <div className="container mx-auto max-w-4xl space-y-8">
-        <div className="bg-gradient-to-r from-emerald-50 via-green-50 to-emerald-50 p-6 rounded-2xl border border-emerald-200 backdrop-blur-sm animate-in slide-in-from-top-4 duration-700">
+        <div className={`p-6 rounded-2xl border backdrop-blur-sm animate-in slide-in-from-top-4 duration-700 ${
+          isDarkMode
+            ? 'bg-gradient-to-r from-emerald-50 via-green-50 to-emerald-50 border-emerald-200'
+            : 'bg-gradient-to-r from-emerald-900/30 via-green-900/30 to-emerald-900/30 border-emerald-700/50'
+        }`}>
           <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent mb-1">Notifications</h1>
           <p className="text-sm opacity-60">Stay updated with your friend requests and connections</p>
         </div>
