@@ -1,9 +1,9 @@
 import { create } from "zustand";
 
 export const useThemeStore = create((set) => ({
-  theme: localStorage.getItem("streamify-theme") || "coffee",
+  theme: "streamify", // Fixed custom green theme
   setTheme: (theme) => {
-    localStorage.setItem("streamify-theme", theme);
-    set({ theme });
+    // Theme is now fixed, but keeping the function for compatibility
+    set({ theme: "streamify" });
   },
 }));
