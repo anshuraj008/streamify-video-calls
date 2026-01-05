@@ -8,6 +8,7 @@ import CallPage from "./pages/CallPage.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
 import OnboardingPage from "./pages/OnboardingPage.jsx";
 import NewLearnersPage from "./pages/NewLearnersPage.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
 
 import { Toaster } from "react-hot-toast";
 
@@ -35,8 +36,10 @@ const App = () => {
               <Layout showSidebar={true}>
                 <HomePage />
               </Layout>
+            ) : !isAuthenticated ? (
+              <LandingPage />
             ) : (
-              <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
+              <Navigate to="/onboarding" />
             )
           }
         />
