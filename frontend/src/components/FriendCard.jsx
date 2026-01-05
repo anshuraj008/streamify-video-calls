@@ -1,17 +1,10 @@
 import { Link } from "react-router";
 import { MessageCircle } from "lucide-react";
 import { getLanguageFlag } from "../lib/languageUtils.jsx";
-import { useThemeStore } from "../store/useThemeStore";
 
 const FriendCard = ({ friend, unreadCount = 0, isOnline = false }) => {
-  const { isDarkMode } = useThemeStore();
-  
   return (
-    <div className={`card hover:shadow-xl transition-all duration-500 hover:scale-[1.03] border group relative ${
-      isDarkMode 
-        ? 'bg-base-200 border-blue-100 hover:border-blue-300' 
-        : 'bg-gray-800 border-gray-700 hover:border-blue-700'
-    }`}>
+    <div className="card hover:shadow-xl transition-all duration-500 hover:scale-[1.03] border group relative bg-[#1E3A8A]/30 backdrop-blur-sm border-[#2563EB]/30 hover:border-[#2563EB]/50">
       {/* Unread badge */}
       {unreadCount > 0 && (
         <div className="absolute -top-2 -right-2 z-20">
@@ -27,33 +20,29 @@ const FriendCard = ({ friend, unreadCount = 0, isOnline = false }) => {
       
       <div className="card-body p-5 relative overflow-hidden">
         {/* Animated background effect */}
-        <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-100 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+        <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#2563EB]/20 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
         
         {/* USER INFO */}
         <div className="flex items-center gap-3 mb-4 relative z-10">
           <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full blur opacity-0 group-hover:opacity-40 transition duration-500"></div>
-            <div className="avatar size-14 rounded-full ring-2 ring-base-100 relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-[#2563EB] to-blue-400 rounded-full blur opacity-0 group-hover:opacity-40 transition duration-500"></div>
+            <div className="avatar size-14 rounded-full ring-2 ring-[#2563EB]/30 relative">
               <img src={friend.profilePic} alt={friend.fullName} className="rounded-full" />
               {/* Online/Offline status indicator */}
-              <div className={`absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 ${
-                isDarkMode ? 'border-white' : 'border-gray-800'
-              } ${
+              <div className={`absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-[#0B1F4B] ${
                 isOnline ? 'bg-success' : 'bg-gray-400'
               } transition-colors`}
                 title={isOnline ? 'Online' : 'Offline'}
               />
               {unreadCount > 0 && (
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-error rounded-full border-2 border-base-100 animate-pulse"></div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-error rounded-full border-2 border-[#0B1F4B] animate-pulse"></div>
               )}
             </div>
           </div>
           <div className="flex-1">
-            <h3 className={`font-bold text-base truncate group-hover:text-primary transition-colors ${
-              isDarkMode ? '' : 'text-gray-200'
-            }`}>{friend.fullName}</h3>
+            <h3 className="font-bold text-base truncate text-white group-hover:text-blue-300 transition-colors">{friend.fullName}</h3>
             <p className={`text-xs flex items-center gap-1 transition-colors ${
-              isOnline ? 'text-success' : isDarkMode ? 'text-gray-500' : 'text-gray-400'
+              isOnline ? 'text-success' : 'text-gray-400'
             }`}>
               <span className={`size-1.5 rounded-full ${
                 isOnline ? 'bg-success animate-pulse' : 'bg-gray-400'

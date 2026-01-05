@@ -1,26 +1,18 @@
 import { Link, useLocation } from "react-router";
 import useAuthUser from "../hooks/useAuthUser";
 import { BellIcon, HomeIcon, ShipWheelIcon, Sparkles, LayoutDashboard } from "lucide-react";
-import { useThemeStore } from "../store/useThemeStore";
 
 const Sidebar = () => {
   const { authUser } = useAuthUser();
   const location = useLocation();
   const currentPath = location.pathname;
-  const { isDarkMode } = useThemeStore();
 
   return (
-    <aside className={`w-64 border-r h-screen sticky top-0 transition-colors hidden lg:flex flex-col ${
-      isDarkMode 
-        ? 'bg-white border-gray-300' 
-        : 'bg-gray-900 border-gray-800'
-    }`}>
-      <div className={`p-5 border-b transition-colors ${
-        isDarkMode ? 'border-gray-300' : 'border-gray-800'
-      }`}>
+    <aside className="w-64 border-r h-screen sticky top-0 hidden lg:flex flex-col bg-[#0B1F4B] border-[#2563EB]/30">
+      <div className="p-5 border-b border-[#2563EB]/30">
         <Link to="/home" className="flex items-center gap-2.5">
-          <ShipWheelIcon className="size-9 text-primary" />
-          <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary  tracking-wider">
+          <ShipWheelIcon className="size-9 text-[#2563EB]" />
+          <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-300 tracking-wider">
             Streamify
           </span>
         </Link>
@@ -29,49 +21,45 @@ const Sidebar = () => {
       <nav className="flex-1 p-4 space-y-1">
         <a
           href="/"
-          className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
-            isDarkMode ? 'text-gray-900 hover:bg-gray-100' : 'text-gray-100 hover:bg-gray-800'
-          }`}
+          className="btn btn-ghost justify-start w-full gap-3 px-3 normal-case text-blue-200 hover:bg-[#1E3A8A]/50"
         >
-          <LayoutDashboard className={`size-5 opacity-70 ${isDarkMode ? 'text-gray-700' : 'text-gray-300'}`} />
+          <LayoutDashboard className="size-5 opacity-70 text-blue-300" />
           <span>Dashboard</span>
         </a>
 
         <Link
           to="/home"
-          className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
+          className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case text-blue-200 hover:bg-[#1E3A8A]/50 ${
             currentPath === "/home" ? "btn-active" : ""
-          } ${isDarkMode ? 'text-gray-900 hover:bg-gray-100' : 'text-gray-100 hover:bg-gray-800'}`}
+          }`}
         >
-          <HomeIcon className={`size-5 opacity-70 ${isDarkMode ? 'text-gray-700' : 'text-gray-300'}`} />
+          <HomeIcon className="size-5 opacity-70 text-blue-300" />
           <span>Home</span>
         </Link>
 
         <Link
           to="/new"
-          className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
+          className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case text-blue-200 hover:bg-[#1E3A8A]/50 ${
             currentPath === "/new" ? "btn-active" : ""
-          } ${isDarkMode ? 'text-gray-900 hover:bg-gray-100' : 'text-gray-100 hover:bg-gray-800'}`}
+          }`}
         >
-          <Sparkles className={`size-5 opacity-70 ${isDarkMode ? 'text-gray-700' : 'text-gray-300'}`} />
+          <Sparkles className="size-5 opacity-70 text-blue-300" />
           <span>New</span>
         </Link>
 
         <Link
           to="/notifications"
-          className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
+          className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case text-blue-200 hover:bg-[#1E3A8A]/50 ${
             currentPath === "/notifications" ? "btn-active" : ""
-          } ${isDarkMode ? 'text-gray-900 hover:bg-gray-100' : 'text-gray-100 hover:bg-gray-800'}`}
+          }`}
         >
-          <BellIcon className={`size-5 opacity-70 ${isDarkMode ? 'text-gray-700' : 'text-gray-300'}`} />
+          <BellIcon className="size-5 opacity-70 text-blue-300" />
           <span>Notifications</span>
         </Link>
       </nav>
 
       {/* USER PROFILE SECTION */}
-      <div className={`p-4 border-t mt-auto transition-colors ${
-        isDarkMode ? 'border-gray-300' : 'border-gray-800'
-      }`}>
+      <div className="p-4 border-t mt-auto border-[#2563EB]/30">
         <div className="flex items-center gap-3">
           <div className="avatar">
             <div className="w-10 rounded-full">
@@ -79,11 +67,9 @@ const Sidebar = () => {
             </div>
           </div>
           <div className="flex-1">
-            <p className={`font-semibold text-sm transition-colors ${
-              isDarkMode ? 'text-gray-900' : 'text-gray-200'
-            }`}>{authUser?.fullName}</p>
-            <p className="text-xs text-success flex items-center gap-1">
-              <span className="size-2 rounded-full bg-success inline-block" />
+            <p className="font-semibold text-sm text-white">{authUser?.fullName}</p>
+            <p className="text-xs text-green-400 flex items-center gap-1">
+              <span className="size-2 rounded-full bg-green-400 inline-block" />
               Online
             </p>
           </div>

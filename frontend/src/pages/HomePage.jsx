@@ -5,13 +5,12 @@ import {
   getStreamToken,
 } from "../lib/api";
 import { Link } from "react-router";
-import { UsersIcon, Sun, Moon } from "lucide-react";
+import { UsersIcon } from "lucide-react";
 
 import FriendCard from "../components/FriendCard";
 import NoFriendsFound from "../components/NoFriendsFound";
 import useAuthUser from "../hooks/useAuthUser";
 import { StreamChat } from "stream-chat";
-import { useThemeStore } from "../store/useThemeStore";
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
 
@@ -19,7 +18,6 @@ const HomePage = () => {
   const [unreadCounts, setUnreadCounts] = useState({});
   const [onlineStatus, setOnlineStatus] = useState({});
   const { authUser } = useAuthUser();
-  const { isDarkMode, toggleDarkMode } = useThemeStore();
 
   const { data: friends = [], isLoading: loadingFriends } = useQuery({
     queryKey: ["friends"],
@@ -169,39 +167,12 @@ const HomePage = () => {
   }, [tokenData, authUser, friends]);
 
   return (
-    <div className={`min-h-screen p-4 sm:p-6 lg:p-8 animate-in fade-in duration-500 transition-colors ${
-      isDarkMode 
-        ? 'bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50' 
-        : 'bg-gradient-to-br from-gray-900 via-black to-gray-900'
-    }`}>
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 animate-in fade-in duration-500 bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A]">
       <div className="container mx-auto space-y-10">
-        {/* Day/Night Toggle Button */}
-        <div className="flex justify-end mb-4">
-          <button
-            onClick={toggleDarkMode}
-            className={`btn btn-circle shadow-lg transition-all duration-300 border-2 ${
-              isDarkMode 
-                ? 'bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 border-blue-200' 
-                : 'bg-gradient-to-br from-gray-900 to-black hover:from-gray-800 hover:to-gray-900 border-gray-700'
-            }`}
-            aria-label="Toggle day/night mode"
-          >
-            {isDarkMode ? (
-              <Sun className="size-6 text-yellow-500 animate-in spin-in duration-500" />
-            ) : (
-              <Moon className="size-6 text-yellow-100 animate-in spin-in duration-500" />
-            )}
-          </button>
-        </div>
-
-        <div className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border backdrop-blur-sm animate-in slide-in-from-top-4 duration-700 p-6 ${
-          isDarkMode 
-            ? 'bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 border-blue-200' 
-            : 'bg-gradient-to-r from-blue-900/30 via-blue-800/30 to-blue-900/30 border-blue-700/50'
-        }`}>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border border-[#2563EB]/30 backdrop-blur-sm animate-in slide-in-from-top-4 duration-700 p-6 bg-[#1E3A8A]/20">
           <div>
-            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-1">Your Friends</h2>
-            <p className={`text-sm transition-colors ${isDarkMode ? 'opacity-60' : 'text-gray-400'}`}>
+            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent mb-1">Your Friends</h2>
+            <p className="text-sm text-blue-200/80">
               Connect and practice languages together
             </p>
           </div>

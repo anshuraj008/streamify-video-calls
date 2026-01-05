@@ -2,11 +2,9 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { acceptFriendRequest, getFriendRequests } from "../lib/api";
 import { BellIcon, ClockIcon, MessageSquareIcon, UserCheckIcon } from "lucide-react";
 import NoNotificationsFound from "../components/NoNotificationsFound";
-import { useThemeStore } from "../store/useThemeStore";
 
 const NotificationsPage = () => {
   const queryClient = useQueryClient();
-  const { isDarkMode } = useThemeStore();
 
   const { data: friendRequests, isLoading } = useQuery({
     queryKey: ["friendRequests"],
@@ -25,19 +23,11 @@ const NotificationsPage = () => {
   const acceptedRequests = friendRequests?.acceptedReqs || [];
 
   return (
-    <div className={`min-h-screen p-4 sm:p-6 lg:p-8 animate-in fade-in duration-500 transition-colors ${
-      isDarkMode 
-        ? 'bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50' 
-        : 'bg-gradient-to-br from-gray-900 via-black to-gray-900'
-    }`}>
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 animate-in fade-in duration-500 bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A]">
       <div className="container mx-auto max-w-4xl space-y-8">
-        <div className={`p-6 rounded-2xl border backdrop-blur-sm animate-in slide-in-from-top-4 duration-700 ${
-          isDarkMode
-            ? 'bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 border-blue-200'
-            : 'bg-gradient-to-r from-blue-900/30 via-blue-800/30 to-blue-900/30 border-blue-700/50'
-        }`}>
-          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-1">Notifications</h1>
-          <p className="text-sm opacity-60">Stay updated with your friend requests and connections</p>
+        <div className="p-6 rounded-2xl border border-[#2563EB]/30 backdrop-blur-sm animate-in slide-in-from-top-4 duration-700 bg-[#1E3A8A]/20">
+          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent mb-1">Notifications</h1>
+          <p className="text-sm text-blue-200/80">Stay updated with your friend requests and connections</p>
         </div>
 
         {isLoading ? (
@@ -48,13 +38,13 @@ const NotificationsPage = () => {
           <>
             {incomingRequests.length > 0 && (
               <section className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <div className="flex items-center gap-3 bg-blue-50 p-4 rounded-xl border border-blue-200">
-                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                    <UserCheckIcon className="h-6 w-6 text-blue-600" />
+                <div className="flex items-center gap-3 bg-[#2563EB]/20 p-4 rounded-xl border border-[#2563EB]/30 backdrop-blur-sm">
+                  <div className="w-10 h-10 rounded-full bg-[#2563EB]/30 flex items-center justify-center">
+                    <UserCheckIcon className="h-6 w-6 text-blue-300" />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-xl font-bold">Friend Requests</h2>
-                    <p className="text-sm opacity-70">You have {incomingRequests.length} pending request{incomingRequests.length > 1 ? 's' : ''}</p>
+                    <h2 className="text-xl font-bold text-white">Friend Requests</h2>
+                    <p className="text-sm text-blue-200/80">You have {incomingRequests.length} pending request{incomingRequests.length > 1 ? 's' : ''}</p>
                   </div>
                   <span className="badge badge-primary badge-lg h-8 px-4 font-bold">{incomingRequests.length}</span>
                 </div>
@@ -63,22 +53,22 @@ const NotificationsPage = () => {
                   {incomingRequests.map((request, index) => (
                     <div
                       key={request._id}
-                      className="card bg-base-200 hover:shadow-xl transition-all duration-500 hover:scale-[1.01] border border-blue-100 hover:border-blue-300 group animate-in fade-in slide-in-from-left-4 duration-500"
+                      className="card bg-[#1E3A8A]/30 backdrop-blur-sm hover:shadow-xl transition-all duration-500 hover:scale-[1.01] border border-[#2563EB]/30 hover:border-[#2563EB]/50 group animate-in fade-in slide-in-from-left-4 duration-500"
                       style={{ animationDelay: `${index * 100}ms` }}
                     >
                       <div className="card-body p-5 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-100 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#2563EB]/20 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
                         
                         <div className="flex items-center justify-between relative z-10">
                           <div className="flex items-center gap-4">
                             <div className="relative">
-                              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
-                              <div className="avatar w-16 h-16 rounded-full ring-2 ring-base-100 relative">
+                              <div className="absolute -inset-1 bg-gradient-to-r from-[#2563EB] to-blue-400 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+                              <div className="avatar w-16 h-16 rounded-full ring-2 ring-[#2563EB]/30 relative">
                                 <img src={request.sender.profilePic} alt={request.sender.fullName} className="rounded-full" />
                               </div>
                             </div>
                             <div>
-                              <h3 className="font-bold text-lg group-hover:text-primary transition-colors">{request.sender.fullName}</h3>
+                              <h3 className="font-bold text-lg text-white group-hover:text-blue-300 transition-colors">{request.sender.fullName}</h3>
                               <div className="flex flex-wrap gap-2 mt-2">
                                 <span className="badge badge-secondary badge-sm gap-1 h-6 shadow-sm">
                                   <span className="font-semibold">Native: {request.sender.nativeLanguage}</span>
@@ -109,13 +99,13 @@ const NotificationsPage = () => {
             {/* ACCEPTED REQS NOTIFICATONS */}
             {acceptedRequests.length > 0 && (
               <section className="space-y-4 animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
-                <div className="flex items-center gap-3 bg-blue-50 p-4 rounded-xl border border-blue-200">
-                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                    <BellIcon className="h-6 w-6 text-blue-600" />
+                <div className="flex items-center gap-3 bg-[#2563EB]/20 p-4 rounded-xl border border-[#2563EB]/30 backdrop-blur-sm">
+                  <div className="w-10 h-10 rounded-full bg-[#2563EB]/30 flex items-center justify-center">
+                    <BellIcon className="h-6 w-6 text-blue-300" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold">New Connections</h2>
-                    <p className="text-sm opacity-70">Recent accepted friend requests</p>
+                    <h2 className="text-xl font-bold text-white">New Connections</h2>
+                    <p className="text-sm text-blue-200/80">Recent accepted friend requests</p>
                   </div>
                 </div>
 
@@ -123,16 +113,16 @@ const NotificationsPage = () => {
                   {acceptedRequests.map((notification, index) => (
                     <div 
                       key={notification._id} 
-                      className="card bg-base-200 hover:shadow-xl transition-all duration-500 hover:scale-[1.01] border border-blue-100 hover:border-blue-300 group animate-in fade-in slide-in-from-right-4 duration-500"
+                      className="card bg-[#1E3A8A]/30 backdrop-blur-sm hover:shadow-xl transition-all duration-500 hover:scale-[1.01] border border-[#2563EB]/30 hover:border-[#2563EB]/50 group animate-in fade-in slide-in-from-right-4 duration-500"
                       style={{ animationDelay: `${index * 100}ms` }}
                     >
                       <div className="card-body p-5 relative overflow-hidden">
-                        <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-blue-100 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                        <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-[#2563EB]/20 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
                         
                         <div className="flex items-start gap-4 relative z-10">
                           <div className="relative">
-                            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
-                            <div className="avatar size-14 rounded-full ring-2 ring-base-100 relative">
+                            <div className="absolute -inset-1 bg-gradient-to-r from-[#2563EB] to-blue-400 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+                            <div className="avatar size-14 rounded-full ring-2 ring-[#2563EB]/30 relative">
                               <img
                                 src={notification.recipient.profilePic}
                                 alt={notification.recipient.fullName}
@@ -141,11 +131,11 @@ const NotificationsPage = () => {
                             </div>
                           </div>
                           <div className="flex-1">
-                            <h3 className="font-bold text-base group-hover:text-blue-600 transition-colors">{notification.recipient.fullName}</h3>
-                            <p className="text-sm my-2 bg-blue-50 rounded-lg px-3 py-2 inline-block border border-blue-200">
-                              <span className="font-semibold">{notification.recipient.fullName}</span> accepted your friend request ✓
+                            <h3 className="font-bold text-base text-white group-hover:text-blue-300 transition-colors">{notification.recipient.fullName}</h3>
+                            <p className="text-sm my-2 bg-[#2563EB]/20 rounded-lg px-3 py-2 inline-block border border-[#2563EB]/30">
+                              <span className="font-semibold text-blue-200">{notification.recipient.fullName}</span> <span className="text-blue-300">accepted your friend request ✓</span>
                             </p>
-                            <p className="text-xs flex items-center gap-1 opacity-70 mt-2">
+                            <p className="text-xs flex items-center gap-1 text-blue-200/70 mt-2">
                               <ClockIcon className="h-4 w-4" />
                               Recently
                             </p>
