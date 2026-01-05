@@ -12,14 +12,61 @@ import {
   MessageList,
   Thread,
   Window,
+  useChannelStateContext,
+  useMessageContext,
 } from "stream-chat-react";
 import { StreamChat } from "stream-chat";
 import toast from "react-hot-toast";
 
 import ChatLoader from "../components/ChatLoader";
 import CallButton from "../components/CallButton";
+import MessageStatus from "../components/MessageStatus";
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
+
+// Custom Message component with read status
+const CustomMessage = (props) => {
+  const { message } = useMessageContext();
+  const { channel } = useChannelStateContext();
+  const { authUser } = useAuthUser();
+  
+  const isMyMessage = message.user.id === authUser?._id;
+
+  return (
+    <div className="str-chat__message-simple-wrapper">
+      <div className={`str-chat__message-simple ${isMyMessage ? 'str-chat__message--me' : 'str-chat__message--other'}`}>
+        {!isMyMessage && (
+          <div className="str-chat__avatar">
+            <img
+              src={message.user.image}
+              alt={message.user.name}
+              className="str-chat__avatar-image"
+            />
+          </div>
+        )}
+        <div className="str-chat__message-text">
+          <div className="str-chat__message-text-inner">
+            {message.text}
+            {isMyMessage && (
+              <MessageStatus 
+                message={message} 
+                channel={channel} 
+                isMyMessage={isMyMessage}
+              />
+            )}
+          </div>
+          <div className="str-chat__message-simple-timestamp">
+            {new Date(message.created_at).toLocaleTimeString('en-US', { 
+              hour: 'numeric', 
+              minute: '2-digit',
+              hour12: true 
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 // Function to show browser notification
 const showNotification = (senderName, messageText) => {
@@ -152,20 +199,30 @@ const ChatPage = () => {
   if (loading || !chatClient || !channel) return <ChatLoader />;
 
   return (
-    <div className="h-[93vh]">
-      <Chat client={chatClient}>
-        <Channel channel={channel}>
-          <div className="w-full relative">
-            <CallButton handleVideoCall={handleVideoCall} />
-            <Window>
-              <ChannelHeader />
-              <MessageList />
-              <MessageInput focus />
-            </Window>
-          </div>
-          <Thread />
-        </Channel>
-      </Chat>
+    <div className="h-[93vh] relative overflow-hidden">
+      {/* Animated gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5"></div>
+      
+      {/* Floating orbs for depth */}
+      <div className="absolute top-20 left-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-20 right-20 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }}></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-accent/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "2s" }}></div>
+      
+      <div className="relative h-full">
+        <Chat client={chatClient}>
+          <Channel channel={channel} Message={CustomMessage}>
+            <div className="w-full h-full relative">
+              <CallButton handleVideoCall={handleVideoCall} />
+              <Window>
+                <ChannelHeader />
+                <MessageList />
+                <MessageInput focus />
+              </Window>
+            </div>
+            <Thread />
+          </Channel>
+        </Chat>
+      </div>
     </div>
   );
 };
