@@ -112,122 +112,109 @@ const CallPage = () => {
         
         .str-video__speaker-layout__wrapper {
           width: 100% !important;
-          height: calc(100vh - 100px) !important;
-          gap: 12px !important;
-          padding: 12px !important;
+          height: calc(100vh - 110px) !important;
+          gap: 16px !important;
+          padding: 16px !important;
         }
         
         .str-video__participant-view {
-          border-radius: 16px !important;
+          border-radius: 20px !important;
           overflow: hidden !important;
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
-          border: 2px solid rgba(255, 255, 255, 0.1) !important;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+          border: 1px solid rgba(255, 255, 255, 0.05) !important;
         }
         
         .str-video__participant-view video {
           object-fit: cover !important;
         }
         
-        /* Refined Call Controls */
+        /* Classic Call Controls */
         .str-video__call-controls {
           position: fixed !important;
-          bottom: 32px !important;
+          bottom: 20px !important;
           left: 50% !important;
           transform: translateX(-50%) !important;
-          background: rgba(17, 24, 39, 0.95) !important;
+          background: rgba(30, 30, 30, 0.95) !important;
           backdrop-filter: blur(16px) !important;
-          padding: 12px 20px !important;
-          border-radius: 60px !important;
-          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+          padding: 14px 20px !important;
+          border-radius: 50px !important;
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 
+                      0 0 0 1px rgba(255, 255, 255, 0.08) !important;
           z-index: 50 !important;
           display: flex !important;
-          gap: 8px !important;
+          gap: 10px !important;
+          align-items: center !important;
         }
         
-        /* Button Styles - Smaller and Sleeker */
+        /* All Buttons - Small Circle Shape */
         .str-video__call-controls button {
-          width: 48px !important;
-          height: 48px !important;
+          width: 44px !important;
+          height: 44px !important;
           border-radius: 50% !important;
           margin: 0 !important;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-          background: rgba(55, 65, 81, 0.8) !important;
-          border: 1px solid rgba(75, 85, 99, 0.5) !important;
+          padding: 0 !important;
+          transition: all 0.2s ease !important;
+          background: rgba(70, 70, 70, 0.85) !important;
+          border: none !important;
           display: flex !important;
           align-items: center !important;
           justify-content: center !important;
           cursor: pointer !important;
+          position: relative !important;
         }
         
         .str-video__call-controls button svg {
           width: 20px !important;
           height: 20px !important;
+          color: #ffffff !important;
         }
         
         .str-video__call-controls button:hover {
-          transform: translateY(-2px) scale(1.05) !important;
-          background: rgba(75, 85, 99, 0.9) !important;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+          background: rgba(90, 90, 90, 0.95) !important;
+          transform: scale(1.08) !important;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
         }
         
         .str-video__call-controls button:active {
-          transform: translateY(0) scale(0.98) !important;
+          transform: scale(0.96) !important;
         }
         
-        /* Active state for toggle buttons (mic off, camera off) */
+        /* Active/Pressed state (mic off, camera off) - Keep gray */
         .str-video__call-controls button[data-active="true"],
         .str-video__call-controls button[aria-pressed="true"] {
-          background: rgba(239, 68, 68, 0.9) !important;
-          border-color: rgba(220, 38, 38, 0.8) !important;
+          background: rgba(90, 90, 90, 0.9) !important;
         }
         
-        /* Leave/Cancel Call Button - Red and distinctive */
+        .str-video__call-controls button[data-active="true"]:hover,
+        .str-video__call-controls button[aria-pressed="true"]:hover {
+          background: rgba(110, 110, 110, 0.95) !important;
+        }
+        
+        /* End Call Button - Only this one is RED */
         .str-video__call-controls button[data-testid="cancel-call-button"],
         .str-video__call-controls button[aria-label*="Leave"],
         .str-video__call-controls button:last-child {
-          background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
-          border-color: #b91c1c !important;
-          box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4) !important;
+          background: #ef4444 !important;
+          width: 44px !important;
+          height: 44px !important;
         }
         
         .str-video__call-controls button[data-testid="cancel-call-button"]:hover,
         .str-video__call-controls button[aria-label*="Leave"]:hover,
         .str-video__call-controls button:last-child:hover {
-          background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
-          box-shadow: 0 6px 16px rgba(239, 68, 68, 0.5) !important;
+          background: #dc2626 !important;
+          box-shadow: 0 4px 16px rgba(239, 68, 68, 0.5) !important;
         }
         
         /* Participant Labels */
         .str-video__participant-view__label {
           background: rgba(0, 0, 0, 0.75) !important;
-          backdrop-filter: blur(10px) !important;
+          backdrop-filter: blur(8px) !important;
           padding: 6px 12px !important;
           border-radius: 8px !important;
           font-weight: 600 !important;
           font-size: 13px !important;
           letter-spacing: 0.3px !important;
-        }
-        
-        /* Tooltip styling */
-        .str-video__call-controls button[title]::after {
-          content: attr(title) !important;
-          position: absolute !important;
-          bottom: 100% !important;
-          left: 50% !important;
-          transform: translateX(-50%) translateY(-8px) !important;
-          background: rgba(0, 0, 0, 0.9) !important;
-          color: white !important;
-          padding: 6px 12px !important;
-          border-radius: 6px !important;
-          font-size: 12px !important;
-          white-space: nowrap !important;
-          opacity: 0 !important;
-          pointer-events: none !important;
-          transition: opacity 0.2s !important;
-        }
-        
-        .str-video__call-controls button:hover[title]::after {
-          opacity: 1 !important;
         }
       `}</style>
       
