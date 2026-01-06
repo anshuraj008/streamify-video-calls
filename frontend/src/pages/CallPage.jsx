@@ -128,53 +128,106 @@ const CallPage = () => {
           object-fit: cover !important;
         }
         
+        /* Refined Call Controls */
         .str-video__call-controls {
           position: fixed !important;
-          bottom: 24px !important;
+          bottom: 32px !important;
           left: 50% !important;
           transform: translateX(-50%) !important;
-          background: rgba(30, 41, 59, 0.95) !important;
-          backdrop-filter: blur(12px) !important;
-          padding: 16px 24px !important;
-          border-radius: 50px !important;
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
-          border: 1px solid rgba(255, 255, 255, 0.1) !important;
+          background: rgba(17, 24, 39, 0.95) !important;
+          backdrop-filter: blur(16px) !important;
+          padding: 12px 20px !important;
+          border-radius: 60px !important;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
           z-index: 50 !important;
+          display: flex !important;
+          gap: 8px !important;
         }
         
+        /* Button Styles - Smaller and Sleeker */
         .str-video__call-controls button {
-          width: 56px !important;
-          height: 56px !important;
+          width: 48px !important;
+          height: 48px !important;
           border-radius: 50% !important;
-          margin: 0 6px !important;
-          transition: all 0.2s ease !important;
-          background: rgba(255, 255, 255, 0.1) !important;
-          border: 1px solid rgba(255, 255, 255, 0.2) !important;
+          margin: 0 !important;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+          background: rgba(55, 65, 81, 0.8) !important;
+          border: 1px solid rgba(75, 85, 99, 0.5) !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          cursor: pointer !important;
+        }
+        
+        .str-video__call-controls button svg {
+          width: 20px !important;
+          height: 20px !important;
         }
         
         .str-video__call-controls button:hover {
-          transform: scale(1.1) !important;
-          background: rgba(255, 255, 255, 0.2) !important;
+          transform: translateY(-2px) scale(1.05) !important;
+          background: rgba(75, 85, 99, 0.9) !important;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
         }
         
+        .str-video__call-controls button:active {
+          transform: translateY(0) scale(0.98) !important;
+        }
+        
+        /* Active state for toggle buttons (mic off, camera off) */
+        .str-video__call-controls button[data-active="true"],
+        .str-video__call-controls button[aria-pressed="true"] {
+          background: rgba(239, 68, 68, 0.9) !important;
+          border-color: rgba(220, 38, 38, 0.8) !important;
+        }
+        
+        /* Leave/Cancel Call Button - Red and distinctive */
         .str-video__call-controls button[data-testid="cancel-call-button"],
-        .str-video__call-controls button[aria-label*="Leave"] {
-          background: #ef4444 !important;
-          border-color: #dc2626 !important;
+        .str-video__call-controls button[aria-label*="Leave"],
+        .str-video__call-controls button:last-child {
+          background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+          border-color: #b91c1c !important;
+          box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4) !important;
         }
         
         .str-video__call-controls button[data-testid="cancel-call-button"]:hover,
-        .str-video__call-controls button[aria-label*="Leave"]:hover {
-          background: #dc2626 !important;
+        .str-video__call-controls button[aria-label*="Leave"]:hover,
+        .str-video__call-controls button:last-child:hover {
+          background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+          box-shadow: 0 6px 16px rgba(239, 68, 68, 0.5) !important;
         }
         
+        /* Participant Labels */
         .str-video__participant-view__label {
-          background: rgba(0, 0, 0, 0.7) !important;
-          backdrop-filter: blur(8px) !important;
-          padding: 8px 16px !important;
+          background: rgba(0, 0, 0, 0.75) !important;
+          backdrop-filter: blur(10px) !important;
+          padding: 6px 12px !important;
           border-radius: 8px !important;
           font-weight: 600 !important;
-          font-size: 14px !important;
+          font-size: 13px !important;
+          letter-spacing: 0.3px !important;
+        }
+        
+        /* Tooltip styling */
+        .str-video__call-controls button[title]::after {
+          content: attr(title) !important;
+          position: absolute !important;
+          bottom: 100% !important;
+          left: 50% !important;
+          transform: translateX(-50%) translateY(-8px) !important;
+          background: rgba(0, 0, 0, 0.9) !important;
+          color: white !important;
+          padding: 6px 12px !important;
+          border-radius: 6px !important;
+          font-size: 12px !important;
+          white-space: nowrap !important;
+          opacity: 0 !important;
+          pointer-events: none !important;
+          transition: opacity 0.2s !important;
+        }
+        
+        .str-video__call-controls button:hover[title]::after {
+          opacity: 1 !important;
         }
       `}</style>
       
