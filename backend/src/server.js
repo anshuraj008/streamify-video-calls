@@ -25,6 +25,17 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+// Middleware to ensure DB connection for serverless
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error("Database connection error:", error);
+    res.status(500).json({ error: "Database connection failed" });
+  }
+});
+
 // Root endpoint for testing
 app.get("/", (req, res) => {
   res.json({ message: "Backend API is running!", status: "OK" });
@@ -42,15 +53,12 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// Connect to DB for serverless - only when app is invoked
-if (process.env.VERCEL !== '1') {
-  connectDB();
-  app.listen(PORT, () => {
+// For local development
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, async () => {
+    await connectDB();
     console.log(`Server is running on port ${PORT}`);
   });
-} else {
-  // For Vercel serverless, connect on each request
-  connectDB();
 }
 
 // Export for Vercel serverless
