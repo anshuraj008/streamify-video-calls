@@ -126,7 +126,11 @@ export async function getFriendRequests(req, res) {
       status: "accepted",
     }).populate("recipient", "fullName profilePic");
 
-    res.status(200).json({ incomingReqs, acceptedReqs });
+    // Filter out requests where sender or recipient is null (deleted users)
+    const validIncomingReqs = incomingReqs.filter(req => req.sender != null);
+    const validAcceptedReqs = acceptedReqs.filter(req => req.recipient != null);
+
+    res.status(200).json({ incomingReqs: validIncomingReqs, acceptedReqs: validAcceptedReqs });
   } catch (error) {
     console.log("Error in getPendingFriendRequests controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });

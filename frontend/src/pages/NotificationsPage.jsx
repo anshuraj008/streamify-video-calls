@@ -50,7 +50,10 @@ const NotificationsPage = () => {
                 </div>
 
                 <div className="space-y-3">
-                  {incomingRequests.map((request, index) => (
+                  {incomingRequests.map((request, index) => {
+                    if (!request?.sender) return null;
+                    
+                    return (
                     <div
                       key={request._id}
                       className="card bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A] backdrop-blur-sm hover:shadow-xl transition-all duration-500 hover:scale-[1.01] border border-[#2563EB]/30 hover:border-[#2563EB]/50 group animate-in fade-in slide-in-from-left-4 duration-500"
@@ -64,7 +67,15 @@ const NotificationsPage = () => {
                             <div className="relative">
                               <div className="absolute -inset-1 bg-gradient-to-r from-[#2563EB] to-blue-400 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
                               <div className="avatar w-16 h-16 rounded-full ring-2 ring-[#2563EB]/30 relative">
-                                <img src={request.sender.profilePic} alt={request.sender.fullName} className="rounded-full" />
+                                <img 
+                                  src={request.sender.profilePic} 
+                                  alt={request.sender.fullName} 
+                                  className="rounded-full"
+                                  onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(request.sender?.fullName || 'User')}&background=2563EB&color=fff&size=128`;
+                                  }}
+                                />
                               </div>
                             </div>
                             <div>
@@ -91,7 +102,8 @@ const NotificationsPage = () => {
                         </div>
                       </div>
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </section>
             )}
@@ -110,7 +122,10 @@ const NotificationsPage = () => {
                 </div>
 
                 <div className="space-y-3">
-                  {acceptedRequests.map((notification, index) => (
+                  {acceptedRequests.map((notification, index) => {
+                    if (!notification?.recipient) return null;
+                    
+                    return (
                     <div 
                       key={notification._id} 
                       className="card bg-gradient-to-br from-[#0B1F4B] to-[#1E3A8A] backdrop-blur-sm hover:shadow-xl transition-all duration-500 hover:scale-[1.01] border border-[#2563EB]/30 hover:border-[#2563EB]/50 group animate-in fade-in slide-in-from-right-4 duration-500"
@@ -129,7 +144,7 @@ const NotificationsPage = () => {
                                 className="rounded-full"
                                 onError={(e) => {
                                   e.target.onerror = null;
-                                  e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(notification.recipient.fullName)}&background=2563EB&color=fff&size=128`;
+                                  e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(notification.recipient?.fullName || 'User')}&background=2563EB&color=fff&size=128`;
                                 }}
                               />
                             </div>
@@ -151,7 +166,8 @@ const NotificationsPage = () => {
                         </div>
                       </div>
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </section>
             )}
