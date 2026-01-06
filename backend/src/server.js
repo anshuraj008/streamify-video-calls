@@ -17,8 +17,9 @@ const __dirname = path.resolve();
 
 // Configure CORS to allow both local and production frontends
 const allowedOrigins = [
-  "http://localhost:5173",
   "https://streamify-video-calls-j2ci.vercel.app",
+  "http://localhost:5173"
+  ,
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
