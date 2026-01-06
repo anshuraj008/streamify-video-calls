@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { useChannelStateContext } from "stream-chat-react";
 import CallButton from "./CallButton";
@@ -16,15 +16,45 @@ const CustomChannelHeader = ({ handleVideoCall }) => {
   const memberCount = members.length;
   const onlineCount = members.filter(m => m.user?.online).length;
 
+  const handleBackClick = () => {
+    console.log("Back button clicked - navigating to /home");
+    navigate("/home");
+  };
+
   return (
     <div className="str-chat__header-livestream">
       <div className="str-chat__header-livestream-left">
         <button
-          onClick={() => navigate(-1)}
-          className="btn btn-ghost btn-sm btn-circle mr-2 hover:bg-white/20 transition-all"
-          aria-label="Go back"
+          type="button"
+          onClick={handleBackClick}
+          style={{
+            background: 'rgba(255, 255, 255, 0.2)',
+            border: 'none',
+            borderRadius: '50%',
+            width: '40px',
+            height: '40px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            marginRight: '12px',
+            transition: 'all 0.2s',
+            flexShrink: 0,
+            zIndex: 1001,
+            pointerEvents: 'auto',
+            position: 'relative'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.3)';
+            e.currentTarget.style.transform = 'scale(1.05)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
+          aria-label="Go back to home"
         >
-          <ArrowLeft className="size-5 text-white" />
+          <ArrowLeft style={{ width: '22px', height: '22px', color: 'white' }} />
         </button>
         
         {otherUser && (

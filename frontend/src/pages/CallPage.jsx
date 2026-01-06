@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router";
 import useAuthUser from "../hooks/useAuthUser";
 import { useQuery } from "@tanstack/react-query";
@@ -26,6 +26,9 @@ const CallPage = () => {
   const [client, setClient] = useState(null);
   const [call, setCall] = useState(null);
   const [isConnecting, setIsConnecting] = useState(true);
+  
+  const isInitializingRef = useRef(false);
+  const cleanupRef = useRef(null);
 
   const { authUser, isLoading } = useAuthUser();
 
@@ -42,6 +45,20 @@ const CallPage = () => {
 
     const initCall = async () => {
       if (!tokenData?.token || !authUser || !callId) return;
+      
+      // Prevent duplicate initialization
+      if (isInitializingRef.current) {
+        console.log("Already initializing, skipping...");
+        return;
+      }
+      
+      isInitializingRef.current = true;
+      
+      // Clean up any existing connection first
+      if (cleanupRef.current) {
+        console.log("Cleaning up existing connection before new join...");
+        await cleanupRef.current();
+      }
 
       try {
         console.log("Initializing Stream video client...");
@@ -60,6 +77,7 @@ const CallPage = () => {
 
         callInstance = videoClient.call("default", callId);
 
+        console.log("Joining call...");
         await callInstance.join({ create: true });
 
         console.log("Joined call successfully");
@@ -75,20 +93,43 @@ const CallPage = () => {
         if (!isCleanedUp) {
           setIsConnecting(false);
         }
+        isInitializingRef.current = false;
       }
     };
 
     initCall();
 
     // Cleanup function to prevent duplicate joins
-    return () => {
+    const cleanup = async () => {
       isCleanedUp = true;
-      if (callInstance) {
-        callInstance.leave().catch(err => console.log('Leave call error:', err));
+      isInitializingRef.current = false;
+      
+      try {
+        if (callInstance) {
+          console.log("Leaving call...");
+          await callInstance.leave();
+        }
+      } catch (err) {
+        console.log('Leave call error:', err);
       }
-      if (videoClient) {
-        videoClient.disconnectUser().catch(err => console.log('Disconnect error:', err));
+      
+      try {
+        if (videoClient) {
+          console.log("Disconnecting video client...");
+          await videoClient.disconnectUser();
+        }
+      } catch (err) {
+        console.log('Disconnect error:', err);
       }
+      
+      setClient(null);
+      setCall(null);
+    };
+    
+    cleanupRef.current = cleanup;
+
+    return () => {
+      cleanup();
     };
   }, [tokenData, authUser, callId]);
 
@@ -146,7 +187,7 @@ const CallPage = () => {
           align-items: center !important;
         }
         
-        /* All Buttons - Small Circle Shape */
+        /* All Buttons - Small Circle Shape with Same Gray Color */
         .str-video__call-controls button {
           width: 44px !important;
           height: 44px !important;
@@ -188,6 +229,33 @@ const CallPage = () => {
         .str-video__call-controls button[data-active="true"]:hover,
         .str-video__call-controls button[aria-pressed="true"]:hover {
           background: rgba(110, 110, 110, 0.95) !important;
+        }
+        
+        /* Reaction, Share Screen, Recording buttons - Force Gray (NOT red) */
+        .str-video__call-controls button[data-testid="reactions-button"],
+        .str-video__call-controls button[aria-label*="Reaction"],
+        .str-video__call-controls button[data-testid="screen-share-button"],
+        .str-video__call-controls button[aria-label*="Share"],
+        .str-video__call-controls button[data-testid="recording-button"],
+        .str-video__call-controls button[aria-label*="Record"],
+        .str-video__call-controls button[aria-label*="screen"],
+        .str-video__call-controls button[data-testid*="recording"],
+        .str-video__call-controls button[data-testid*="reactions"],
+        .str-video__call-controls button[data-testid*="screen-share"] {
+          background: rgba(70, 70, 70, 0.85) !important;
+        }
+        
+        .str-video__call-controls button[data-testid="reactions-button"]:hover,
+        .str-video__call-controls button[aria-label*="Reaction"]:hover,
+        .str-video__call-controls button[data-testid="screen-share-button"]:hover,
+        .str-video__call-controls button[aria-label*="Share"]:hover,
+        .str-video__call-controls button[data-testid="recording-button"]:hover,
+        .str-video__call-controls button[aria-label*="Record"]:hover,
+        .str-video__call-controls button[aria-label*="screen"]:hover,
+        .str-video__call-controls button[data-testid*="recording"]:hover,
+        .str-video__call-controls button[data-testid*="reactions"]:hover,
+        .str-video__call-controls button[data-testid*="screen-share"]:hover {
+          background: rgba(90, 90, 90, 0.95) !important;
         }
         
         /* End Call Button - Only this one is RED */
