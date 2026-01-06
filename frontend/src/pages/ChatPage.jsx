@@ -171,6 +171,9 @@ const ChatPage = () => {
           members: [authUser._id, targetUserId],
         });
 
+        // Create the channel first (creates if doesn't exist)
+        await currChannel.create();
+        // Then watch for updates
         await currChannel.watch();
 
         currentChannel = currChannel;

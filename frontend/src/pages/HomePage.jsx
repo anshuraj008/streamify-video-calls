@@ -65,7 +65,11 @@ const HomePage = () => {
           for (const friend of friends) {
             const channelId = [authUser._id, friend._id].sort().join("-");
             try {
-              const channel = chatClient.channel("messaging", channelId);
+              const channel = chatClient.channel("messaging", channelId, {
+                members: [authUser._id, friend._id],
+              });
+              // Create channel if it doesn't exist
+              await channel.create();
               await channel.watch();
               
               // Get unread count for this channel
