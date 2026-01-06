@@ -19,6 +19,7 @@ const __dirname = path.resolve();
 const allowedOrigins = [
   "http://localhost:5173",
   "https://streamify-video-calls-82qi.vercel.app",
+  "https://streamify-video-calls-j2ci.vercel.app",
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
@@ -28,7 +29,8 @@ app.use(
       // Allow requests with no origin (like mobile apps or curl requests)
       if (!origin) return callback(null, true);
       
-      if (allowedOrigins.includes(origin)) {
+      // Check if origin matches allowed origins or is from Vercel preview deployment
+      if (allowedOrigins.includes(origin) || (origin && origin.includes('streamify-video-calls') && origin.includes('.vercel.app'))) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
