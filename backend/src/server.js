@@ -25,6 +25,11 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+// Root endpoint for testing
+app.get("/", (req, res) => {
+  res.json({ message: "Backend API is running!", status: "OK" });
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/chat", chatRoutes);
@@ -37,12 +42,16 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// Connect to DB immediately for serverless
-connectDB();
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Connect to DB for serverless - only when app is invoked
+if (process.env.VERCEL !== '1') {
+  connectDB();
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+} else {
+  // For Vercel serverless, connect on each request
+  connectDB();
+}
 
 // Export for Vercel serverless
 export default app;
