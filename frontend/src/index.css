@@ -133,29 +133,62 @@
 
 /* User's messages (right side) */
 .str-chat__message--me .str-chat__message-text-inner {
-  background: linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%);
-  color: white;
-  border-radius: 18px 18px 4px 18px;
-  padding: 12px 16px;
-  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
-  font-size: 15px;
-  line-height: 1.5;
-  display: inline-flex;
-  align-items: flex-end;
-  gap: 6px;
+  background: linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%) !important;
+  color: white !important;
+  border-radius: 18px 18px 4px 18px !important;
+  padding: 12px 16px !important;
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3) !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+  display: inline-block !important;
+  word-wrap: break-word !important;
+  word-break: normal !important;
+  white-space: pre-wrap !important;
+  max-width: 100% !important;
+  text-align: left !important;
+  writing-mode: horizontal-tb !important;
+  overflow-wrap: break-word !important;
 }
 
 /* Other user's messages (left side) */
 .str-chat__message--other .str-chat__message-text-inner {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  color: #1f2937;
-  border-radius: 18px 18px 18px 4px;
-  padding: 12px 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(229, 231, 235, 0.5);
-  font-size: 15px;
-  line-height: 1.5;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  color: #1f2937 !important;
+  border-radius: 18px 18px 18px 4px !important;
+  padding: 12px 16px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid rgba(229, 231, 235, 0.5) !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+  display: inline-block !important;
+  word-wrap: break-word !important;
+  word-break: normal !important;
+  white-space: pre-wrap !important;
+  max-width: 100% !important;
+  text-align: left !important;
+  writing-mode: horizontal-tb !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Override Stream's default paragraph and span styles inside messages */
+.str-chat__message-text-inner p,
+.str-chat__message-text-inner span,
+.str-chat__message-text-inner div {
+  display: inline !important;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  writing-mode: horizontal-tb !important;
+  vertical-align: baseline !important;
+}
+
+/* Ensure text content displays horizontally */
+.str-chat__message-simple-text-inner {
+  display: inline-block !important;
+  white-space: pre-wrap !important;
+  writing-mode: horizontal-tb !important;
 }
 
 /* Message timestamp */
@@ -190,17 +223,16 @@
 }
 
 .str-chat__message-text {
-  display: flex;
-  flex-direction: column;
+  display: block;
   max-width: 70%;
 }
 
 .str-chat__message--me .str-chat__message-text {
-  align-items: flex-end;
+  text-align: right;
 }
 
 .str-chat__message--other .str-chat__message-text {
-  align-items: flex-start;
+  text-align: left;
 }
 
 .str-chat__avatar-image {
@@ -389,4 +421,73 @@
   .str-chat__message-text-inner {
     max-width: 85%;
   }
+}
+
+/* ========== CRITICAL FIX FOR HORIZONTAL TEXT ========== */
+/* Force all text elements to display horizontally */
+.str-chat__message-simple-text,
+.str-chat__message-simple-text *,
+.str-chat__message-text-inner,
+.str-chat__message-text-inner *,
+.str-chat__message-text-inner p,
+.str-chat__message-text-inner span,
+.str-chat__message-text-inner div,
+.str-chat__message-text-inner a {
+  display: inline !important;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  flex-direction: row !important;
+}
+
+/* Ensure message bubble is inline-block */
+.str-chat__message-simple .str-chat__message-text-inner,
+.str-chat__message--me .str-chat__message-text-inner,
+.str-chat__message--other .str-chat__message-text-inner {
+  display: inline-block !important;
+  max-width: 100% !important;
+  width: auto !important;
+}
+
+/* Remove any flex column layout from text containers */
+.str-chat__message-text,
+.str-chat__message-simple-text {
+  display: block !important;
+  flex-direction: row !important;
+}
+
+/* Fix for any nested elements */
+.str-chat__message-text-inner > *,
+.str-chat__message-text-inner *:not(br) {
+  display: inline !important;
+  flex-direction: row !important;
+}
+
+/* Ensure line breaks work correctly */
+.str-chat__message-text-inner br {
+  display: block !important;
+  content: '' !important;
+  margin: 0 !important;
+}
+
+/* ULTRA AGGRESSIVE FIX - Force all text to be horizontal */
+.str-chat__message-text-inner,
+.str-chat__message-text-inner *,
+.str-chat__message-simple-text,
+.str-chat__message-simple-text * {
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+  text-orientation: mixed !important;
+  writing-mode: horizontal-tb !important;
+  direction: ltr !important;
+}
+
+/* Force container to be horizontal */
+.str-chat__message-simple-text-inner,
+.str-chat__message-text {
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
 }

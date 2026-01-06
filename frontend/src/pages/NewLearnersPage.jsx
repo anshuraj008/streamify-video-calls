@@ -87,7 +87,15 @@ const NewLearnersPage = () => {
                       <div className="relative group/avatar">
                         <div className="absolute -inset-1 bg-gradient-to-r from-[#2563EB] to-blue-400 rounded-full blur opacity-30 group-hover/avatar:opacity-60 transition duration-500"></div>
                         <div className="avatar size-20 rounded-full ring-2 ring-[#2563EB]/30 relative">
-                          <img src={user.profilePic} alt={user.fullName} className="rounded-full" />
+                          <img 
+                            src={user.profilePic} 
+                            alt={user.fullName} 
+                            className="rounded-full"
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullName)}&background=2563EB&color=fff&size=128`;
+                            }}
+                          />
                         </div>
                       </div>
 

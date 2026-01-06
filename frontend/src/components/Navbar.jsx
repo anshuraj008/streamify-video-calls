@@ -42,7 +42,14 @@ const Navbar = () => {
 
           <div className="avatar">
             <div className="w-9 rounded-full">
-              <img src={authUser?.profilePic} alt="User Avatar" rel="noreferrer" />
+              <img 
+                src={authUser?.profilePic} 
+                alt="User Avatar" 
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(authUser?.fullName || 'User')}&background=2563EB&color=fff&size=128`;
+                }}
+              />
             </div>
           </div>
 

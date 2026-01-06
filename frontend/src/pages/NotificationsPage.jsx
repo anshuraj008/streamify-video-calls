@@ -127,6 +127,10 @@ const NotificationsPage = () => {
                                 src={notification.recipient.profilePic}
                                 alt={notification.recipient.fullName}
                                 className="rounded-full"
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(notification.recipient.fullName)}&background=2563EB&color=fff&size=128`;
+                                }}
                               />
                             </div>
                           </div>

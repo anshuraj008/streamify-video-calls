@@ -31,7 +31,14 @@ const LandingPage = () => {
                   <div className="flex items-center gap-3 bg-blue-900/30 border border-blue-700/50 rounded-full px-4 py-2">
                     <div className="avatar">
                       <div className="w-8 h-8 rounded-full ring-2 ring-blue-500/50">
-                        <img src={authUser.profilePic} alt={authUser.fullName} />
+                        <img 
+                          src={authUser.profilePic} 
+                          alt={authUser.fullName}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(authUser.fullName)}&background=2563EB&color=fff&size=128`;
+                          }}
+                        />
                       </div>
                     </div>
                     <span className="text-sm font-semibold text-blue-100">{authUser.fullName}</span>

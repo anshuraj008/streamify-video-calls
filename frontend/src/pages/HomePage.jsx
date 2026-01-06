@@ -120,21 +120,31 @@ const HomePage = () => {
 
         // Create named handler functions that can be removed later
         messageHandler = (event) => {
-          // Only update if message is from a friend (not from you)
-          if (event.user.id !== authUser._id) {
-            setUnreadCounts(prev => ({
-              ...prev,
-              [event.user.id]: (prev[event.user.id] || 0) + 1
-            }));
+          // Only update if message is from a friend (not from you) and channel is not active
+          if (event.user.id !== authUser._id && event.channel_type === 'messaging') {
+            const channelId = event.cid.split(':')[1];
+            const friendId = event.user.id;
+            
+            // Get the actual unread count from the channel instead of incrementing
+            const channel = chatClient.channel('messaging', channelId);
+            if (channel && channel.state) {
+              setUnreadCounts(prev => ({
+                ...prev,
+                [friendId]: channel.state.unreadCount || 0
+              }));
+            }
           }
         };
 
         readHandler = (event) => {
-          if (event.user.id === authUser._id) {
+          if (event.user?.id === authUser._id) {
+            // Extract channel ID from the event
+            const eventChannelId = event.channel_id || event.cid;
+            
             // Find which friend's channel was read
             friends.forEach(friend => {
               const channelId = [authUser._id, friend._id].sort().join("-");
-              if (event.channel_id === `messaging:${channelId}`) {
+              if (eventChannelId === `messaging:${channelId}` || eventChannelId === channelId) {
                 setUnreadCounts(prev => ({
                   ...prev,
                   [friend._id]: 0
@@ -147,8 +157,9 @@ const HomePage = () => {
         // Listen for new messages to update counts in real-time
         chatClient.on("message.new", messageHandler);
 
-        // Listen for when messages are marked as read
+        // Listen for when messages are marked as read (both events)
         chatClient.on("message.read", readHandler);
+        chatClient.on("notification.mark_read", readHandler);
 
       } catch (error) {
         console.error("Error initializing chat tracking:", error);
@@ -161,7 +172,10 @@ const HomePage = () => {
     return () => {
       if (chatClient) {
         if (messageHandler) chatClient.off("message.new", messageHandler);
-        if (readHandler) chatClient.off("message.read", readHandler);
+        if (readHandler) {
+          chatClient.off("message.read", readHandler);
+          chatClient.off("notification.mark_read", readHandler);
+        }
       }
     };
   }, [tokenData, authUser, friends]);

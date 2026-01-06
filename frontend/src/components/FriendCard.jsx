@@ -27,7 +27,15 @@ const FriendCard = ({ friend, unreadCount = 0, isOnline = false }) => {
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-[#2563EB] to-blue-400 rounded-full blur opacity-0 group-hover:opacity-40 transition duration-500"></div>
             <div className="avatar size-14 rounded-full ring-2 ring-[#2563EB]/30 relative">
-              <img src={friend.profilePic} alt={friend.fullName} className="rounded-full" />
+              <img 
+                src={friend.profilePic} 
+                alt={friend.fullName} 
+                className="rounded-full"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(friend.fullName)}&background=2563EB&color=fff&size=128`;
+                }}
+              />
               {/* Online/Offline status indicator */}
               <div className={`absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-[#0B1F4B] ${
                 isOnline ? 'bg-success' : 'bg-gray-400'

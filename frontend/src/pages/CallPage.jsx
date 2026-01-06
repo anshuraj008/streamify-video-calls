@@ -36,8 +36,12 @@ const CallPage = () => {
   });
 
   useEffect(() => {
+    let videoClient = null;
+    let callInstance = null;
+    let isCleanedUp = false;
+
     const initCall = async () => {
-      if (!tokenData.token || !authUser || !callId) return;
+      if (!tokenData?.token || !authUser || !callId) return;
 
       try {
         console.log("Initializing Stream video client...");
@@ -48,29 +52,44 @@ const CallPage = () => {
           image: authUser.profilePic,
         };
 
-        const videoClient = new StreamVideoClient({
+        videoClient = new StreamVideoClient({
           apiKey: STREAM_API_KEY,
           user,
           token: tokenData.token,
         });
 
-        const callInstance = videoClient.call("default", callId);
+        callInstance = videoClient.call("default", callId);
 
         await callInstance.join({ create: true });
 
         console.log("Joined call successfully");
 
-        setClient(videoClient);
-        setCall(callInstance);
+        if (!isCleanedUp) {
+          setClient(videoClient);
+          setCall(callInstance);
+        }
       } catch (error) {
         console.error("Error joining call:", error);
         toast.error("Could not join the call. Please try again.");
       } finally {
-        setIsConnecting(false);
+        if (!isCleanedUp) {
+          setIsConnecting(false);
+        }
       }
     };
 
     initCall();
+
+    // Cleanup function to prevent duplicate joins
+    return () => {
+      isCleanedUp = true;
+      if (callInstance) {
+        callInstance.leave().catch(err => console.log('Leave call error:', err));
+      }
+      if (videoClient) {
+        videoClient.disconnectUser().catch(err => console.log('Disconnect error:', err));
+      }
+    };
   }, [tokenData, authUser, callId]);
 
   if (isLoading || isConnecting) return <PageLoader />;
