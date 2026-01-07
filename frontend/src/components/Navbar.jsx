@@ -20,28 +20,18 @@ const Navbar = ({ onMenuClick, showSidebar = false }) => {
     <nav className="border-b sticky top-0 z-30 h-16 flex items-center bg-[#101831] border-[#2563EB]/30">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between w-full">
-          {/* LOGO - ALWAYS VISIBLE IN TOP LEFT */}
-          <div className="flex items-center gap-3">
-            {/* Hamburger Menu - Only on mobile when sidebar should be shown */}
-            {showSidebar && (
-              <button
-                onClick={onMenuClick}
-                className="lg:hidden btn btn-ghost btn-circle"
-                aria-label="Open menu"
-              >
-                <MenuIcon className="h-6 w-6 text-white" />
-              </button>
-            )}
-            
-            <Link to="/home" className="flex items-center gap-2.5">
-              <ShipWheelIcon className="size-7 sm:size-9 text-white" />
-              <span className="text-xl sm:text-3xl font-bold font-mono tracking-wider text-white">
-                Streamify
-              </span>
-            </Link>
-          </div>
+          {/* Hamburger Menu - Only on mobile when sidebar should be shown */}
+          {showSidebar && (
+            <button
+              onClick={onMenuClick}
+              className="lg:hidden btn btn-ghost btn-circle"
+              aria-label="Open menu"
+            >
+              <MenuIcon className="h-6 w-6 text-white" />
+            </button>
+          )}
 
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-3 sm:gap-4 ml-auto">
             <Link to="/notifications">
               <button className="btn btn-ghost btn-circle">
                 <BellIcon className="h-6 w-6 text-white" />
