@@ -1,15 +1,54 @@
 import { Link, useLocation } from "react-router";
 import useAuthUser from "../hooks/useAuthUser";
-import { BellIcon, HomeIcon, ShipWheelIcon, Sparkles, LayoutDashboard } from "lucide-react";
+import { BellIcon, HomeIcon, ShipWheelIcon, Sparkles, LayoutDashboard, XIcon } from "lucide-react";
+import { useEffect } from "react";
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen = false, onClose = () => {} }) => {
   const { authUser } = useAuthUser();
   const location = useLocation();
   const currentPath = location.pathname;
 
+  // Close sidebar when route changes on mobile
+  useEffect(() => {
+    onClose();
+  }, [currentPath]);
+
+  // Prevent body scroll when mobile sidebar is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   return (
-    <aside className="w-64 h-screen sticky top-0 hidden lg:flex flex-col bg-[#101831]">
-      <div className="p-5">
+    <>
+      {/* Mobile Overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          onClick={onClose}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        className={`
+          w-64 h-screen fixed lg:sticky top-0 z-50 lg:z-auto
+          flex flex-col bg-[#101831] transition-transform duration-300 ease-in-out
+          ${
+            isOpen
+              ? 'translate-x-0'
+              : '-translate-x-full lg:translate-x-0'
+          }
+          lg:flex
+        `}
+      >
+      <div className="p-5 flex items-center justify-between">
         <Link to="/home" className="flex items-center gap-3 group">
           <div className="relative">
             <div className="absolute inset-0 bg-blue-500 blur-xl opacity-50 group-hover:opacity-70 transition-opacity"></div>
@@ -19,6 +58,15 @@ const Sidebar = () => {
             Streamify
           </span>
         </Link>
+        
+        {/* Close button - Only visible on mobile */}
+        <button
+          onClick={onClose}
+          className="lg:hidden btn btn-ghost btn-circle btn-sm"
+          aria-label="Close menu"
+        >
+          <XIcon className="h-5 w-5 text-white" />
+        </button>
       </div>
 
       <nav className="flex-1 p-4 space-y-1">
@@ -85,7 +133,8 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-    </aside>
+      </aside>
+    </>
   );
 };
 export default Sidebar;
